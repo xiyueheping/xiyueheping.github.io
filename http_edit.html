@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>编辑网址</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">  
+<style>
+ 
+/*注册表单样式*/
+   form{
+    color:black;
+    /*background-color: pink;*/
+    height:390px;
+    width: 450px;
+    padding: 40px;
+    margin: 0 auto;
+    border-radius: 8px;
+    margin-top: 20px;
+   }
+
+   form input{
+    display: inline-block;
+    margin-left: 10px;
+    width: 280px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+#btn-add{
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
+  
+/*分类下拉框样式*/
+#input_type{
+  /*float: left;*/
+  height: 35px;
+  width: 120px;
+  margin-top: 10px;
+  box-shadow: 0 0 5px #ccc;
+  margin-left: 10px;
+   border: none;
+   outline: none;
+   padding-left: 10px;
+   /*font-weight: bold;*/
+     font-size: 18px;
+     border: 1.5px solid #ccc;
+}
+#input_type option{
+ 
+  /*font-weight: bold;*/
+  background-color: #ffffff;
+  font-size: 18px;
+}
+ 
+
+</style>
+</head>
+<body>
+    <form>
+     <div id="" style="text-align: center;font-weight: bold;/*color: red;*/font-size: 18px;">编辑网址信息</div>
+     <div style="margin-top:25px;">
+       &nbsp;&nbsp;&nbsp;&nbsp;名称：<input id="input_name" autocomplete="off" type="text" name="">
+     </div>
+     <div  style="margin-top:25px;">
+       &nbsp;&nbsp;&nbsp;&nbsp;地址：<input id="input_href" autocomplete="off" type="text" name="">
+     </div>
+     <div style="margin-top:25px;">
+       &nbsp;&nbsp;&nbsp;&nbsp;分类：<select id="input_type">
+                                      <option value =""></option>
+                                      <option value =""></option>
+                                      <option value=""></option>
+                                      <option value=""></option>
+                                      <option value=""></option>
+                                      <option value=""></option>
+                                    </select></div>
+     
+     <div style="margin-top:35px;">
+      <button class="btn btn-primary" id="btn_xiugai">确认修改</button>
+     </div>
+  </form>
+</body>
+<script>
+  //全局变量用来保存原来网址信息
+  var obj = null;
+
+   window.onload = function(){
+    // window.opener.aaa();
+    alert(window.parent.location);
+      // 获取url后面字符串并解码
+     var name =  window.location.search.substr(1);
+     name = decodeURI(name);
+     
+     if (name=='') {
+          // 如果url后面没有数据直接退出
+          return;
+     }
+
+      // 把localstorage中数据提取到全局对象中
+      var json_str = window.localStorage.getItem("http");
+      var http_data = JSON.parse(json_str);
+
+      //提取出网址和分类数据
+     var http_array = http_data.data;
+     var type_array = http_data.type;
+      
+     
+      //根据name值把整个本地对应的http对象读出来
+      for (var i = 0; i < http_array.length; i++) {
+        if(name == http_array[i].name) {
+                 obj = http_array[i];
+                 console.log(obj);
+        }
+      }
+   
+     //渲染下拉框中所有选项信息
+     var xialakuang = document.getElementsByTagName('option');
+     for(var i = 0;i<6;i++){     
+       xialakuang[i].innerHTML = type_array[i];
+       xialakuang[i].value = type_array[i];
+     }
+
+     //把对应的http三个属性渲染到页面
+     document.getElementById('input_name').value = obj.name;
+     document.getElementById('input_href').value = obj.href;
+     document.getElementById('input_type').value = obj.type;
+   }    
+
+
+
+
+
+
+   //点击确认修改后更新数据
+  document.getElementById('btn_xiugai').onclick = function(){
+       //首先接收输入框中的数据
+      var name =   document.getElementById('input_name').value
+      var href =   document.getElementById('input_href').value
+      var type =  document.getElementById('input_type').value 
+
+      //若数据没有变化 直接关闭窗口
+      if ((name == obj.name) && (href == obj.href) && (type == obj.type)) {
+        window.close();
+
+        return false;
+      }
+
+      //否则继续执行
+
+      //对输入数据进行格式验证
+      var new_httpobj =  {
+           name:name,
+           href:href,
+           type:type
+       }
+      var flag = check_http(new_httpobj);
+      if (flag == false) {
+
+            return false;
+      }
+
+
+       // 把localstorage中数据提取出来
+      var json_str = window.localStorage.getItem("http");
+      var http_data = JSON.parse(json_str);
+
+      //提取出网址和分类数据
+     var http_array = http_data.data;
+     var type_array = http_data.type;
+      
+     
+
+
+    /*****对网址信息比对，查看是否有同名情况***/
+
+      //检索要修改的网址的下标位置
+      var index = -1;
+      for (var i = 0; i < http_array.length; i++) {
+        if(obj.name == http_array[i].name) {
+                 index = i;
+        }
+      }
+
+      //修改http_data对象的数据
+      http_data.data[index] = new_httpobj;
+      console.log(obj);
+      console.log(new_httpobj);
+
+
+
+      // 把全局对象保存到本地
+      var str = JSON.stringify(http_data);//把json对象转换成字符串
+      window.localStorage.setItem('http',str);
+
+
+      
+      //关闭当前窗口
+      // window.close();
+      
+      //最后在父页面重新渲染网址信息
+     
+
+      return false;
+    
+      
+
+
+
+  }
+
+
+//网址信息验证 传入网址信息，返回验证结果
+function check_http(new_httpobj){
+       /****表单验证部分*****/
+       if(new_httpobj.name==""||new_httpobj.name=="输入名称"||new_httpobj.href==""||new_httpobj.href=="http://"){
+            alert("请输入有效数据");
+             return false;}
+
+       //正则表达式判断网址格式
+        var box=/^http:\/\/.*$|^https:\/\/.*$/
+        if(!box.test(new_httpobj.href)){
+           new_httpobj.href="http://"+new_httpobj.href;}
+
+       //控制名称长度 若name太长直接return
+        if(new_httpobj.name.length>30){
+         alert('网址名称过长');
+          return false;
+        }
+
+      return true;
+}
+
+</script>
+</html>

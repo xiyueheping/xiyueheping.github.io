@@ -1,0 +1,223 @@
+<!DOCTYPE>
+<html>
+
+
+<head>
+    <title>天气详情</title>
+    <style type="text/css">
+       body{
+       	 padding: 0px;
+       	 margin: 2px;
+       }
+        table
+        {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 35px;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+
+
+        table tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+
+
+        table tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <table width="100%" class="table">
+       
+        <thead>
+            <tr>
+                <th>
+                    日期
+                </th>
+                <th>
+                    天气
+                </th>
+                <th>
+                    温度
+                </th>
+                <th>
+                    风向
+                </th>
+                 <th>
+                    风力
+                </th>
+                
+            </tr>
+        </thead>
+        <tr>
+            <td class="date">
+                
+            </td>
+            <td class="weather">
+                
+            </td>
+            <td class="wendu">
+                
+            </td>
+            <td class="fengxiang">
+                
+            </td>
+            <td class="fengli">
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+                
+            </td>
+            <td class="weather">
+               
+            </td>
+            <td class="wendu">
+                
+            </td>
+            <td class="fengxiang">
+                
+            </td>
+            <td class="fengli">
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+                
+            </td>
+            <td class="weather">
+                
+            </td>
+            <td class="wendu">
+                
+            </td>
+            <td class="fengxiang">
+                
+            </td>
+            <td class="fengli">
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+                
+            </td>
+            <td class="weather">
+                
+            </td>
+            <td class="wendu">
+                
+            </td>
+            <td class="fengxiang">
+                
+            </td>
+            <td class="fengli">
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+                
+            </td>
+            <td class="weather">
+                
+            </td>
+            <td class="wendu">
+                
+            </td>
+            <td class="fengxiang">
+                
+            </td>
+            <td class="fengli">
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+                
+            </td>
+            <td class="weather">
+                
+            </td>
+            <td class="wendu">
+                
+            </td>
+            <td class="fengxiang">
+                
+            </td>
+            <td class="fengli">
+                
+            </td>
+        </tr>
+         <tr>
+            <td class="date">
+                
+            </td>
+            <td class="weather">
+                
+            </td>
+            <td class="wendu">
+                
+            </td>
+            <td class="fengxiang">
+                
+            </td>
+            <td class="fengli">
+                
+            </td>
+        </tr>
+    </table>
+</body>
+<script type="text/javascript">
+	 
+	 window.onload = function() {
+     
+     // 获取url后面字符串并解码
+     var jsondata =  window.location.search.substr(1);
+     jsondata = decodeURI(jsondata);
+     
+
+     //序列化为js对象
+     var obj = JSON.parse(jsondata);
+     // alert(obj);
+
+     
+     //需要渲染的dom对象数组
+     var array_datedom = document.getElementsByClassName('date');
+     var array_weather = document.getElementsByClassName('weather');
+     var array_wendu = document.getElementsByClassName('wendu');
+     var array_fengxiang = document.getElementsByClassName('fengxiang');
+     var array_fengli = document.getElementsByClassName('fengli');
+     for(var i = 0; i < obj.length; i++){
+        array_datedom[i].innerHTML = obj[i].date;
+        array_weather[i].innerHTML = obj[i].day.weather;
+        array_wendu[i].innerHTML = obj[i].day.temphigh+'℃~'+obj[i].night.templow+'℃';
+        array_fengxiang[i].innerHTML = obj[i].day.winddirect;
+        array_fengli[i].innerHTML = obj[i].day.windpower;
+     }
+     
+}	
+</script>
+</html>
+
+
+
