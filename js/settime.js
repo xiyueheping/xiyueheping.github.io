@@ -30,10 +30,10 @@ var module_time = function(){
                         day_name[5]="星期五"
                         day_name[6]="星期六"
 
-                        //设置对应div中的html内容    hour+"时"+minute+"分"+"<br/>"+
-                      top_time.innerHTML= month+"月"+day+"日 "+day_name[xingqi];
-                      console.log('---获取到系统时间：');
-                      console.log(month+"月"+day+"日 "+day_name[xingqi]);
+                        //设置对应div中的html内容
+                      top_time.innerHTML= day_name[xingqi];
+                      // console.log('---获取到系统时间：');
+                      // console.log(day_name[xingqi]);
                       
                       }
 }

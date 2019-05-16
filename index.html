@@ -2,232 +2,99 @@
 <html>
 <head>
 <meta charset="utf-8">
-       <title>@我的主页@</title>
-<!-- <link href="/favicon.ico" rel="shortcut icon"> -->
+       <title>@mylink@</title>
+<!--<link href="/favicon.ico" rel="shortcut icon">-->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-
+<link rel="stylesheet" type="text/css" href="css/buju.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" href="css/styles.css" />
-<link rel="stylesheet" href="css/demo2.css" />
+<link rel="stylesheet" type="text/css" href="css/top.css">
+<link rel="stylesheet" type="text/css" href="css/foot.css">
+<link rel="stylesheet" type="text/css" href="css/none.css">
+
 <style type="text/css">
-   video{
-       position:absolute;
-       width:auto;
-       height:auto;
-       min-width:100%;
-       min-height: 100%;
-       right: 0;
-       top: 0;
-       z-index:-1999;
-  }
-  
-
-     
- .spinner {
-  margin: auto 0;
-  width: 130px;
-  text-align: center;
-  /*border: 1px solid yellow;*/
-}
- 
-.spinner > div {
-  width: 20px;
-  height: 20px;
-  background-color: #ffffff;
- 
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
-  animation: bouncedelay 1.4s infinite ease-in-out;
-  /* Prevent first frame from flickering when animation starts */
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
- 
-.spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
- 
-.spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
-}
- 
-@-webkit-keyframes bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0.0) }
-  40% { -webkit-transform: scale(1.0) }
-}
- 
-@keyframes bouncedelay {
-  0%, 80%, 100% {
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 40% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
-
-
 </style>
 </head>
-<body>
+<body >
 <!-- -------------------------------背景视频和雪花特效-------------------------- -->
-    <video autoplay muted loop id="player" width="100%">
-        <source src="video/bg1.mov" type="video/mp4"> 
-    </video> 
-  
-    <canvas id="snowFallTop" class="snowFall snowFallTop" width="1220" height="500" style="left: 321px;"></canvas>
-    <canvas id="snowFallLeft" class="snowFall snowFallLeft" width="321" height="1500" style="width: 321px;"></canvas>
-    <canvas id="snowFallRight" class="snowFall snowFallRight" width="321" height="1500" style="width: 321px;"></canvas>
+    <canvas id="snowFallLeft" class="snowFall snowFallLeft" height="500" ></canvas>
+    <canvas id="snowFallTop" class="snowFall snowFallTop" width="1220" height="500" style="display: none;
+margin:0 auto;"  ></canvas>
+    <canvas id="snowFallRight" class="snowFall snowFallRight"  height="500" ></canvas>
 
 
 <!-- **************************** 顶部导航栏中的所有信息 *************************************** -->
-<div id="top" style="position: fixed;  left:50%;margin-left:-670px; top:3px;">
-      <table id="top_table" cellspacing="0" cellpadding="0" >
-        <tr>
-          <td style="width:20%;font-size: 22px;">
-            <a>何丁丁|优秀是一种习惯</a>
-            
-          </td>
-          <td style="width:12%;" id="top_time"></td>
-          <td style="width:40%;" id="top_sousuo">
-               <form id="form_search" action="http://www.baidu.com/s" target="_blank">
-               <input id="input_search" class="form-control" autofocus="autofocus"  placeholder="输入关键词" type="text" onFocus="this.select()" name="wd">
-               <input type="submit" id="button_search"  value="">
-               </form>
-          </td>
-          <td style="width:5%">
-            <a title="我的备忘录" href="#" onclick="remember(event)">备忘录</a>
-          </td>
+<div id="top">
+     <form id="top_form" action="http://www.baidu.com/s" target="_blank">
+        <input id="top_from_search" autocomplete="off" class="form-control" autofocus="autofocus"  placeholder="输入关键词" type="text" onFocus="this.select()" name="wd">
+        <input type="submit" id="top_from_button"  value="">
+    </form>
 
+    <div id="top_remember">备忘录</div>
+    <div id="top_translate">翻译</div>
+    <div id="top_time"></div>
+    <div id="top_city"></div>
+    <div id="top_weather"></div>
+    <div id="top_xiangqing"></div>
 
-          <td  style="width:15%;color:#eee;">
-             <a id="select_city"></a>
-             <a id="top_tianqi">
-
-                <div class="spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-                </div>
-             </a>
-             
-          </td>
-
-
-          <td style="width:8% ">
-            <a title="查看更多天气信息" id="xiangqing" href="#" onclick="showtianqi(event)"></a>
-          </td>
-        </tr>
-      </table>
 </div>
 
-<!-- 切换搜索引擎的菜单 -->
-<div id="search_nav" >
-  <a id="abd">百度搜索</a>
-  <a id="asg">搜狗搜索</a>
-  <a id="agg">谷歌搜索</a>
-  <a id="aby">必应搜索</a>
-</div>
-
-
-
-<!-- *********************************网址表格部分****************************************** -->
-<table id="table1" cellspacing="0" cellpadding="0" >
-
-            <tr>
-                 <td class="td_title"></td>
-                 <td class="td_title"></td>
-                 <td class="td_title"></td>
-                 <td class="td_title"></td>
-                 <td class="td_title"></td>
-                 <td class="td_title"></td>
-            </tr>
-
-            <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-            <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-            <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-            <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-             <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-             <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-               <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-               <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-               <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-            <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-             <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-             <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-            <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
-            <tr>
-                 <td class="td_local1"></td><td class="td_local2"></td><td class="td_local3"></td><td class="td_local4"></td><td class="td_local5"></td><td class="td_local6"></td>
-            </tr>
+<!-- ***********************主体内容框**************************-->
+<table id="content">
 </table>
 
 
-<!-- ************************底部相对位置的添加网址文本框***********************************/ -->
-<div id="foot" class="foot_fixed" >
 
-      <input style="background:transparent;" autocomplete="off" id="input_name" class="form-control"  name="keyword" type="text" placeholder="输入名称:(3-8)"  onFocus="this.select()" onBlur="">
-      <input style="background:transparent;" autocomplete="off" id="input_href" class="form-control"  name="keyword" type="text" placeholder="http://" onFocus="this.select()" onBlur="">
-        <select id="fenlei">
-              <option value =""></option>
-              <option value =""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
+
+
+
+
+
+
+
+
+
+<!-- ************************底部相对位置的添加网址文本框***********************************/ -->
+<div id="foot">
+
+      <input style="background:transparent;" autocomplete="off" id="foot_input_name" class="form-control"  name="keyword" type="text" placeholder="输入名称:"  onFocus="this.select()">
+      <input style="background:transparent;" autocomplete="off" id="foot_input_href" class="form-control"  name="keyword" type="text" placeholder="https://" onFocus="this.select()">
+        <select id="foot_fenlei">
         </select>
-       
-       <button onclick="http_add()" id="button_add" >添加</button> 
-       <button onclick="trans(event)" id="button_delete" >翻译</button>          
+       <button  id="foot_addhttp" >添加</button>
 </div>
 
+
 <!--********************************** 隐藏的页面元素 ****************************************-->
-  <!-- 鼠标右键点击超链接自定义菜单 -->
-  <div id="menu_a" >
-    <a id="" onclick="http_edit(event)">编辑</a>
-    <a id="" onclick="http_del()">删除</a>
-    <a id="" onclick="http_top_move()">上移</a>
-    <a id="" onclick="http_bottom_move()">下移</a>
+
+<!-- 切换搜索引擎的菜单 -->
+<div id="none_search_nav" >
+    <a id="abd">百度搜索</a>
+    <a id="asg">搜狗搜索</a>
+    <a id="agg">谷歌搜索</a>
+    <a id="aby">必应搜索</a>
+</div>
+<!--右上角网址分类标题菜单-->
+<ul id="none_httptitle_nav">
+</ul>
+
+<!-- 鼠标右键点击网址链接自定义菜单 -->
+  <div id="none_menu_a" >
+    <a id="youjian_http_edit" >编辑</a>
+    <a id="youjian_http_del" >删除</a>
+    <a id="youjian_http_top_move" >上移</a>
+    <a id="youjian_http_bottom_move" >下移</a>
   </div>
-  
+
   <!-- 鼠标右键点击分类自定义菜单 -->
-  <div id="menu_fenlei" >
-    <a id="" onclick="fenlei_rename()">编辑标题</a>
-    <a id="" onclick="leftmove()">左移标题</a>
-    <a id="" onclick="rightmove()">右移标题</a>
+  <div id="none_menu_fenlei" >
+    <a id="none_edittitle" >编辑标题</a>
+    <a id="none_deltitle" >删除标题</a>
+    <a id="none_upmovetitle" >上移标题</a>
+    <a id="none_downmovetitle" >下移标题</a>
   </div>
-  
-  
+
   <!-- 点击编辑网址后显示此编辑框 -->
-   <form id="form_httpedit" style="display: none;">
+<form id="none_httpedit" style="display: none;">
        <div id="" style="text-align: center;font-weight: bold;/*color: red;*/font-size: 18px;">  编辑网址信息</div>
        <div style="margin-top:25px;">
          &nbsp;&nbsp;&nbsp;&nbsp;名称：<input id="input_name_fsl" placeholder="输入名称:(3-8)" onFocus="  this.select()" autocomplete="off" type="text" name="">
@@ -236,81 +103,183 @@
          &nbsp;&nbsp;&nbsp;&nbsp;地址：<input id="input_href_fsl" placeholder="http://" onFocus="  this.select()" autocomplete="off" type="text" name="">
        </div>
        <div style="margin-top:25px;">
-         &nbsp;&nbsp;&nbsp;&nbsp;分类：<select id="input_type_fsl">
-                                        <option class="option_fsl" value =""></option>
-                                        <option class="option_fsl" value =""></option>
-                                        <option class="option_fsl" value=""></option>
-                                        <option class="option_fsl" value=""></option>
-                                        <option class="option_fsl" value=""></option>
-                                        <option class="option_fsl" value=""></option>
-                                      </select></div>
-       
+         &nbsp;&nbsp;&nbsp;&nbsp;分类：<select id="input_type_fsl"></select></div>
+
        <div style="margin-top:35px;">
-        <button class="btn btn-primary" onclick="return http_xiugai()" id="btn_xiugai">确认修改</button>
+        <button class="btn btn-primary" onclick="return m_event.http_querenxiugai()" id="none_btn_xiugai">确认修改</button>
        </div>
-       <img id="edit_close" onclick="http_edit_close()"  src="images/edit_close.png" >
+       <img id="none_edit_close" onclick="http_edit_close()"  src="images/edit_close.png" >
    </form>
-  
-  <!-- 回到顶部按钮 -->
-  <div class="actGotop" style="z-index: 999">
-      <a href="javascript:;" title="Top"></a>
-  </div>
+
+<!-- 点击备忘录按钮后显示此编辑框 -->
+<form id="none_remember" style="display: none;">
+    <div id="remember_title" style="">备忘录</div>
+    <textarea id="remember_textword" name="word">
+    </textarea>
+    <img id="remember_close"   src="images/edit_close.png" >
+</form>
+
+<!--点击翻译按钮后响应此弹框-->
+<form id="none_trans" style="display: none;">
+    <div id="trans_title" style="">翻译</div>
+    <textarea id="trans_from" name="word"  placeholder="输入待翻译文本"></textarea>
+    <textarea id="trans_to" name="word"  style=""></textarea>
+    <img id="trans_close"   src="images/edit_close.png" >
+</form>
 
 
+<!--点击天气详情按钮后响应此弹框 <script type="text/javascript" src ="js/bootstrap.min.js"></script>-->
+<form id="none_tianqixiangqing" style="display: none;">
+    <div id="tianqixiangqing_title" >天气详情</div>
+    <table id="tianqixiangqing_table" class="table">
 
-<!--********************************** 最底部的相册 ******************************************-->
-<div class="container" style="margin-top: 165px;">
-     <div id="ipresenter">
-       <div class="step" data-x="0" data-y="0" data-thumbnail="images/thumbs/aaa1.jpg">
-         <img src="images/photos/aaa1.jpg" />
-       </div>
-       <div class="step" data-x="1500" data-y="0" data-rotatex="180" data-easing="easeInOutQuint"      data-pausetime="15000" data-thumbnail="images/thumbs/aaa2.jpg">
-         <img src="images/photos/aaa2.jpg" />
-       </div>
-       <div class="step" data-x="3000" data-y="0" data-rotatey="180" data-pausetime="2000" data-thumbnail     ="images/thumbs/aaa3.jpg">
-         <img src="images/photos/aaa3.jpg" />
-       </div>
-       <div class="step" data-x="4500" data-y="0" data-rotatex="180" data-thumbnail="images/thumbs/     aaa4.jpg">
-         <img src="images/photos/aaa4.jpg" />
-       </div>
-       <div class="step" data-x="6000" data-y="0" data-rotate="180" data-thumbnail="images/thumbs/     aaa5.jpg">
-         <img src="images/photos/aaa5.jpg" />
-       </div>
-       <div class="step" data-x="7500" data-y="0" data-rotatey="180" data-thumbnail="images/thumbs/     aaa6.jpg">
-         <img src="images/photos/aaa6.jpg" />
-       </div>
-       <div class="step" data-x="9000" data-y="0" data-thumbnail="images/thumbs/aaa7.jpg">
-         <img src="images/photos/aaa7.jpg" />
-       </div>
-       <div class="step" data-x="10500" data-y="0" data-rotate="80" data-thumbnail="images/thumbs/     aaa8.jpg">
-         <img src="images/photos/aaa8.jpg" />
-       </div>
-       <div class="step" data-x="12000" data-y="0" data-rotatex="180" data-thumbnail="images/thumbs/     aaa9.jpg">
-         <img src="images/photos/aaa9.jpg" />
-       </div>
-       <div class="step" data-x="13500" data-y="0" data-rotatey="180" data-scale="0.6" data-thumbnail="     images/thumbs/aaa10.jpg">
-         <img src="images/photos/aaa10.jpg" />
-       </div>
-       <div class="step" data-x="15000" data-y="0" data-rotatey="-180" data-thumbnail="images/thumbs/     aaa11.jpg">
-         <img src="images/photos/aaa11.jpg" />
-       </div>
-       <div class="step" data-x="16500" data-y="0" data-rotatey="180" data-thumbnail="images/thumbs/     aaa12.jpg">
-         <img src="images/photos/aaa12.jpg" />
-       </div>
-     </div>
-</div>
-    
+        <thead>
+        <tr>
+            <th>
+                日期
+            </th>
+            <th>
+                天气
+            </th>
+            <th>
+                温度
+            </th>
+            <th>
+                风向
+            </th>
+            <th>
+                风力
+            </th>
 
-    
-   
+        </tr>
+        </thead>
+        <tr>
+            <td class="date">
+
+            </td>
+            <td class="weather">
+
+            </td>
+            <td class="wendu">
+
+            </td>
+            <td class="fengxiang">
+
+            </td>
+            <td class="fengli">
+
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+
+            </td>
+            <td class="weather">
+
+            </td>
+            <td class="wendu">
+
+            </td>
+            <td class="fengxiang">
+
+            </td>
+            <td class="fengli">
+
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+
+            </td>
+            <td class="weather">
+
+            </td>
+            <td class="wendu">
+
+            </td>
+            <td class="fengxiang">
+
+            </td>
+            <td class="fengli">
+
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+
+            </td>
+            <td class="weather">
+
+            </td>
+            <td class="wendu">
+
+            </td>
+            <td class="fengxiang">
+
+            </td>
+            <td class="fengli">
+
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+
+            </td>
+            <td class="weather">
+
+            </td>
+            <td class="wendu">
+
+            </td>
+            <td class="fengxiang">
+
+            </td>
+            <td class="fengli">
+
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+
+            </td>
+            <td class="weather">
+
+            </td>
+            <td class="wendu">
+
+            </td>
+            <td class="fengxiang">
+
+            </td>
+            <td class="fengli">
+
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+
+            </td>
+            <td class="weather">
+
+            </td>
+            <td class="wendu">
+
+            </td>
+            <td class="fengxiang">
+
+            </td>
+            <td class="fengli">
+
+            </td>
+        </tr>
+    </table>
+    <img id="tianqixiangqing_close"   src="images/edit_close.png" >
+</form>
 </body>
+<script type="text/javascript" src ="js/jquery-3.2.0.js"><i/script>
 
-
-
-<script type="text/javascript" src ="js/jquery-3.2.0.js"></script>
-<script type="text/javascript" src ="js/bootstrap.min.js"></script>
+<script src="js/md5.js"></script>
 <script type="text/javascript" src="js/snow.js"></script>
-<script type="text/javascript" src="js/album.js"></script>
 
 
 <script type="text/javascript" src ="js/settime.js"></script>
@@ -321,9 +290,4 @@
 <script type="text/javascript" src ="js/trans.js"></script>
 <script type="text/javascript" src="js/event_listen.js"></script>
 <script type="text/javascript" src ="js/index.js"></script>
-
 </html>
-
-
-              
-            

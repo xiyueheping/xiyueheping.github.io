@@ -80,15 +80,15 @@ var module_snow = function(){
                              }
                          }
                          function b(){
-                           d.style.left=((document.body.clientWidth-1220)/2)+"px";
-             
-                           if(document.body.clientWidth-1220>20){
-                             x.width=(document.body.clientWidth-1220)/2;
-                             x.height=742;x.style.width=x.width+"px";
-                             e.width=(document.body.clientWidth-1220)/2;
-                             e.height=742;e.style.width=x.width+"px"
-             
-                           }
+                           // d.style.left=((document.body.clientWidth-1220)/2)+"px";
+                           //
+                           // if(document.body.clientWidth-1220>20){
+                           //   x.width=(document.body.clientWidth-1220)/2;
+                           //   x.height=742;x.style.width=x.width+"px";
+                           //   e.width=(document.body.clientWidth-1220)/2;
+                           //   e.height=742;e.style.width=x.width+"px"
+                           //
+                           // }
              
                          }
              

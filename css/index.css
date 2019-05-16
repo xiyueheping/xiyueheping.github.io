@@ -1,5 +1,6 @@
-@charset "utf_8"
+@charset "utf_8";
 
+/* 设置默认样式   */
 *{
   margin:0px;
   padding: 0px;
@@ -7,434 +8,81 @@
 a:hover{
   text-decoration: none;
 }
-    
-  
-  /*********************最上边的大框框样式********************************/
-  #top{
-    /*margin:0 auto;*/
-    width: 1340px;
-    height: 60px;
-    
-
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
-    background: url(../images/bg_nav_rep.png) repeat-x;
-     border-radius:5px;
-  }
-  #top_table{
-     height: 60px;
-     width:100%;
-     
-  }
-  
-/*顶部表格中单元格的样式*/
- #top_table td{
-     /*border: 1px solid red;*/
-     /*width: 16.7%;*/
-     text-align: center;
-     color:#eee;
-     font-size:16px;
-     font-family: 新宋体;
- }
-
-#top_table a{
-  color:#eee
-}
-
-#search_nav{
-  width:100px;z-index:100;position: absolute;right: 410px;top:53px;
-  display: none;
+a:visited{
+    text-decoration: none;
 }
 
 
-#search_nav a{
-  color: black;
-   display: inline-block;
-   background-color: #fff;
-   width: 100px;
-   height: 35px;
-   text-align: center;
-   line-height: 35px;
+/***************************主体内容框中的表格样式***********************/
+
+#content a{
+
+   /*border: #00c6ff 1px solid;*/
+    position: relative;
+   display: block;
+   margin: 0 auto;
+   width: 110px;
+    height: 110px;
+    padding-top: 15px;
+    text-align: center;
+    border-radius: 5px;
+}
+#content a:hover{
+    background: rgba(255,255,255,0.2);;
+
 }
 
-#search_nav a:hover{
-  
-  background-color: #38aae1;
-  
+.httpimg{
+    /*display: block;*/
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    color: red;font-size: 22px;
+    line-height: 70px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
+/*图片加载不出来的代替样式*/
+.httpimg2{
 
-
-
-
-  /*******************************顶部搜索框和按钮样式************************/
-  #img_search{
-      float: left;
-      /*margin-left: 30px;*/
-       /*border-radius:3px;*/
-       margin-top: 5px;
-     }
-  #button_search{
-    margin-top: 5px;
-     height: 35px;
-     width: 100px;
-     float: left;
-     margin-left: 1px;
-     /*border-radius:3px;*/
-     color: #e8f0de;  
-     border: solid 1px #538312;  
-     background: #64991e;  
-     background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));  
-     background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);  
-  }
-
-#button_search:hover{
-    background: #538018;  
-    background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));  
-    background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);  
-}
-
-  #input_search{
-      
-      float: left;
-      margin-left: 3px;
-       width: 400px;
-       border-radius: 0px;
-       color: #8a8a8a;
-       height: 35px;
-       margin-top: 5px;
-  }
-
-
- /************************网址编辑框样式***********************************************/
-
-  #form_httpedit{
-    color:black;
-    background-color: #ffffff;
-    height:390px;
-    width: 450px;
-    padding: 40px;
-    margin: 0 auto;
-    border-radius: 8px;
-    margin-top: 20px;
-
-    /*使固定定位元素居中*/
-    position: fixed;
-     position:fixed;
-     margin:auto;
-     left:0;
-     right:0;
-     top:0;
-     bottom:0;
-   }
-
-   #form_httpedit input{
     display: inline-block;
-    margin-left: 10px;
-    width: 280px;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    border: 1.5px solid #ccc;
-    border-radius: 4px;
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    font-size: 35px;
+    line-height: 70px;
+    font-family: 华文楷体;
 
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    /*color: #3bb05e;*/
+    /*background-color: #ffffff;*/
+    color:#ffffff;
+    background-color: #0e88eb;
+    /*background-image: url("../images/httpimg.png");*/
 }
 
-/*修改按钮的样式*/
-#btn_xiugai{
-  display: block;
-  margin: 0 auto;
+.http_del{
+    width: 20px;height: 20px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+
 }
-/*右上角关闭按钮的样式*/
-#edit_close{
-   width: 20px;height: 20px;position: absolute;top: 15px;right: 15px;
+.http_del:hover{
+
+    width: 24px;height: 24px;
+    top: 0px;
+    right: 0px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*分类下拉框样式*/
-#input_type_fsl{
-  /*float: left;*/
-  height: 35px;
-  width: 120px;
-  margin-top: 10px;
-  box-shadow: 0 0 5px #ccc;
-  margin-left: 10px;
-   border: none;
-   outline: none;
-   padding-left: 10px;
-   /*font-weight: bold;*/
-     font-size: 18px;
-     border: 1.5px solid #ccc;
+.httpname{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
-#input_type_fsl option{
- 
-  /*font-weight: bold;*/
-  background-color: #ffffff;
-  font-size: 18px;
-}
- 
-
-
-
-
-
-
-
-
-
-
-
-  /********************底部网址输入框按钮样式*******************/
-  #foot{
-     width: 1290px;
-     height: 55px;
-    /*border: 1px solid red;*/
-   
-  }
-
-  /**搜索编辑网址区域固定定位的样式**/
-  .foot_fixed{
-     position: fixed;
-     bottom: 10px;
-     left: 50%;
-     margin-left: -645px;
-  }
-  /**搜索编辑网址区域绝对定位的样式**/
-  .foot_absolute{
-     position: absolute;
-     top:930px;
-     left: 50%;
-     margin-left: -645px;
-  }
-
-
-  #foot button{
-  margin-top: 10px;
-  height: 35px;
-  width: 60px;
-  float: left;
-  margin-left: 10px;
-  border-radius:3px;
-   color: #e8f0de;  
-    border: solid 1px #538312;  
-    background: #64991e;  
-    background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));  
-    background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);  
-   }
-#foot button:hover{
-  background: #538018;  
-    background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));  
-    background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);  
-
-   }
-   
-/*分类下拉框样式*/
-#fenlei{
-  float: left;
-  height: 35px;
-  width: 120px;
-  margin-top: 10px;
-  box-shadow: 0 0 5px #ccc;
-  margin-left: 10px;
-   border: none;
-   outline: none;
-   padding-left: 10px;
-   /*font-weight: bold;*/
-     font-size: 18px;
-}
-#fenlei option{
- 
-  /*font-weight: bold;*/
-  background-color: #ffffff;
-  font-size: 18px;
-}
-  #input_name{
-       float: left;
-       width: 250px;
-       color: #8a8a8a;
-       height: 35px;
-       margin-left: 220px;
-       margin-top: 10px;
-       border-width: 1.2px;
-  }
-  #input_href{
-       float: left;
-       width: 250px;
-       border-width: 1.2px;
-       color: #8a8a8a;
-       height: 35px;
-       margin-left: 5px;
-       margin-top: 10px;
-  }
-
-
-
-
-
-/*****************************表头分类标题的样式********************************/
-.td_title{
-
-font-size: 25px;
-color: gold;
-letter-spacing: 0;
-text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135 ;
-text-align:center;
-border: 1px solid;
-}
-
-
-
-  /***************************展示网址的表格样式***********************/
-  #table1{
-        margin: 0 auto;
-        width: 1300px;
-        height: 850px;
-        margin-top: 75px;
-        /*border: 1px solid;*/
-  }
-   #table1 td{
-        width: 216.2px;
-        height: 56.6px;
-        /*border: 1px solid;*/
-        overflow: hidden;/*超出文本隐藏*/
-         padding-top: 5px;
-         text-overflow:ellipsis;
-         white-space: nowrap;
-        display:inline-block;
-       }
-
-  /**********************************设置表格中超链接样式*****************/
-  #table1 a{
-    color: orange;
-    font-weight: bold;
-    text-decoration: none;
-    font-family:宋体;
-    font-size:18px;
-    margin-left: 45px;
-    /*overflow: hidden;*/
-   /* text-overflow: ellipsis;
-         white-space: nowrap;*/
-  }
-  #table1 a:hover{
-    color: red;
-    text-decoration: none;
-  }
-  
-
-
-  /**一个备用类，用于向链接后加删除按钮*/
-  .left_2_delete {
-        display: inline-block;
-        vertical-align: middle;
-        width: 20px;
-        height: 18px;
-        background: url(../images/delete2.png);
-        background-size: 100%;
-        margin-left: 5px;
- }
-
-
-/**************************************返回顶部火箭样式*************************/
-.actGotop{
-       position:fixed;
-       _position:absolute; 
-       bottom:50px; 
-       right:40px;
-       width:150px;
-       height:195px;
-       display:none;
-     }
-
-.actGotop a,.actGotop a:link{width:150px;height:195px;display:inline-block; background:url(../images/gotop.png) no-repeat; _background:url(../images/gotop.gif) no-repeat; outline:none;}
-.actGotop a:hover{width:150px; height:195px; background:url(../images/gotopd.gif) no-repeat; outline:none;}
-
-
-
-
-
-
-
-
-
-
-/***********雪花效果**************/
-.toolbar{height:31px;line-height:29px;color:#8e8e8e;background:#f5f6f8;display:block;text-align:center}
-.snowFall{position: absolute; top: 0; z-index: 3333;pointer-events: none;_display: none; color: #ffffff;}
-.snowFallTop{left: 0; width: 1220px; height: 162px; }
-.snowFallLeft{left: 0; height: 1500px; z-index: 3333;}
-.snowFallRight{right: 0; height: 1500px; z-index: 3333;}
-
-
-
-/*右键超链接菜单样式*/
-#menu_a{
-  width:100px;z-index:100;right: 410px;top:53px;
-
-  position: fixed;/*//事件点击位置判断是根据窗口固定距离，所以右键菜单也应该是固定定位*/
-  display: none;
-}
-#menu_a a{
-  color: black;
-   display: inline-block;
-   background-color: #fff;
-   width: 100px;
-   height: 35px;
-   text-align: center;
-   line-height: 35px;
-   border: 1px black;
-}
-
-#menu_a a:hover{
-  
-  background-color: #38aae1;
-  
-}
-
-/*右键分类菜单样式*/
-#menu_fenlei{
-  width:100px;z-index:100;position: absolute;right: 410px;top:53px;
-  display: none;
-}
-#menu_fenlei a{
-  color: black;
-   display: inline-block;
-   background-color: #fff;
-   width: 100px;
-   height: 35px;
-   text-align: center;
-   line-height: 35px;
-   border: 1px black;
-}
-
-#menu_fenlei a:hover{
-  
-  background-color: #38aae1;
-  
-}
-
 
