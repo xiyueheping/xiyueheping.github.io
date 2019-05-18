@@ -29,7 +29,8 @@ var module_city_weather = function() {
                         jsonpCallback:"QQmap",
                         url:'http://apis.map.qq.com/ws/location/v1/ip',
                         success:function(data){
-                            
+                            console.log("---地点数据:");
+                            console.log(data);
                             var s = data.result.ad_info.city;
                             s=s.substring(0,s.length-1);
 
@@ -53,7 +54,8 @@ var module_city_weather = function() {
                         },
                         error : function(err){
 
-                          // console.log("---当前地点信息加载失败\n");
+                          console.log("---当前地点信息加载失败");
+                          console.log(err);
                           var div_tianqi = document.getElementById("top_weather");
                           div_tianqi.innerHTML = "Failed to load..";
 
@@ -118,8 +120,8 @@ var module_city_weather = function() {
                 appkey: 'f30ea145de0e8d22'
             },
             success:function(data){
-                // console.log("---天气信息加载成功\n")
-                // console.log(data.result.daily);
+                console.log("---天气信息加载成功\n")
+                console.log(data.result.daily);
 
                 // 把天气信息保存到模块全局对象中
                 json_data_weather = data.result.daily;
@@ -146,8 +148,8 @@ var module_city_weather = function() {
                 document.getElementById("top_xiangqing").innerHTML = '更多详情';
             },
             error:function(xhr){
-                // console.log("---天气信息加载失败\n");
-                // console.log(xhr);
+                console.log("---天气信息加载失败");
+                console.log(xhr);
 
 
                 var div_tianqi = document.getElementById("top_weather");

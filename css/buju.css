@@ -13,11 +13,11 @@
  */
 body{
     position: relative;
-    border: #2b542c 1px solid;
+    /*border: #2b542c 1px solid;*/
     width: 1300px;
     margin: 0 auto;
-    background: url("../images/bg.jpg");
-    background-repeat:no-repeat;
+    background: url("../images/bg.jpg") no-repeat center;
+
 }
 
 /**
