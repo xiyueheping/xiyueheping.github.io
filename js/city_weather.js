@@ -27,7 +27,7 @@ var module_city_weather = function() {
                     　　　　},
                         jsonp:"callback",
                         jsonpCallback:"QQmap",
-                        url:'http://apis.map.qq.com/ws/location/v1/ip',
+                        url:'https://apis.map.qq.com/ws/location/v1/ip',
                         success:function(data){
                             console.log("---地点数据:");
                             console.log(data);
@@ -112,7 +112,7 @@ var module_city_weather = function() {
 
         //从API接口获取天气数据
         $.ajax({
-            url:'http://api.jisuapi.com/weather/query',
+            url:'https://api.jisuapi.com/weather/query',
             type:'GET',
             dataType:'jsonp',
             data: {
