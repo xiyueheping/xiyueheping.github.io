@@ -215,18 +215,20 @@ var module_event = function() {
 
      // 响 应 回 车 事 件
      this.keydown = function(){
-
+          var moveinout = this.moveinout;//把移入移出事件处理函数保存到当前变量
           //在网址框中点击回车响应添加网址函数
           document.getElementById('foot_input_name').onkeydown = function(event) {
                    
                    if((event.keyCode||event.which)==13){
                        m_http.http_add();
+                       moveinout(); // 重新注册移入移出事件
                    }
               }
           document.getElementById('foot_input_href').onkeydown = function(event) {
                    
                    if((event.keyCode||event.which)==13){
                        m_http.http_add();
+                       moveinout(); // 重新注册移入移出事件
                    }
               }
 
