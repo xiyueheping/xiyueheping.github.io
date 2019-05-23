@@ -58,12 +58,14 @@ var module_event = function() {
     this.addtitle = function () {
         m_http.addtitle();
     }
-    //由网址图标注册的加载错误事件
-    this.imgerror = function (event) {
-        event.target.parentNode.innerHTML = `<div class = "httpimg2">${event.target.parentNode.name[0]}</div>
-                <div class="httpname">${event.target.parentNode.name}</div>
-                <img style="display: none" onclick="return m_event.http_del(event)" class="http_del" src="images/http_del.png">`;
+
+    //由网址图标注册的加载成功事件
+    this.imgonload = function (event) {
+        //显示当前图片并隐藏备用样式
+        event.target.style.display= 'inline-block';
+        event.target.nextElementSibling.style.display= 'none';
     }
+
     //由网址编辑框确认修改按钮响应函数
     this.http_querenxiugai = function () {
         //如果修改成功重新注册移入移出事件
@@ -201,10 +203,10 @@ var module_event = function() {
         for(var i = 0;i<arr.length;i++){
             arr[i].onmouseenter = function (event) {
 
-                this.children[2].style.display = 'inline-block';
+                this.children[3].style.display = 'inline-block';
             }
             arr[i].onmouseleave = function (event) {
-                this.children[2].style.display = 'none';
+                this.children[3].style.display = 'none';
             }
         }
 

@@ -708,9 +708,9 @@ var module_http = function() {
             return;
         }
         for(var i = 0;i<data.length;i++){
-
              td_arr[i].innerHTML = `<a target="_blank" class="httpabox" name = "${data[i].name}"  href="${data[i].href}">
-                <img class="httpimg"  onerror="m_event.imgerror(event)" src=${this.getico(data[i].href)}>
+                <img class="httpimg" style="display: none"  onload="m_event.imgonload(event)" src=${this.getico(data[i].href)}>
+                <div class="httpimg2" style="display: inline-block;">${data[i].name[0]}</div>
                 <div class="httpname">${data[i].name}</div>
                 <img style="display: none" onclick="return m_event.http_del(event)" class="http_del" src="images/http_del.png">
             </a>`
