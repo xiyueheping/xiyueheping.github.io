@@ -39,7 +39,7 @@ var module_trans = function(){
         }
         document.getElementById('trans_to').value = '正在加载中...';
         $.ajax({
-            url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+            url: 'https://api.fanyi.baidu.com/api/trans/vip/translate',
             type: 'get',
             dataType: 'jsonp',
             data: {
