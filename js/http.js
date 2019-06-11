@@ -30,16 +30,18 @@ var module_http = function() {
             ]
         }
     ]
-
+    //当前网址分页
+    var thistype = null;
     //加载页面默认执行 把本地信息更新到全局对象http_data 并进行渲染
 	this.http_chushihua = function(){
 
                    
                     /***如果刚开始本地数据为空，向本地写入初始网址信息****/
-                      if(window.localStorage.getItem("mylink_http_data")===null){
+                      if(window.localStorage.getItem("mylink_http_data")===null ||window.localStorage.getItem("thistype")===null){
                          // console.log('---初始化本地网址数据');
                          var str_type = JSON.stringify(http_data);
                          window.localStorage.setItem('mylink_http_data',str_type);
+                         window.localStorage.setItem('thistype',JSON.stringify(http_data[0].type));
                      }
 
 
@@ -48,16 +50,13 @@ var module_http = function() {
                      http_data = JSON.parse(json_str);
 
                      //记录当前页面需要渲染的分类
-                     var type;
-                     if(http_data.length==0){
-                         type = null;
-                     }
-                     else{
-                         type = http_data[0].type;
-                     }
+                     thistype = JSON.parse(window.localStorage.getItem("thistype"));
+                     // console.log(thistype);
+
+
                     //根据更新的全局对象渲染页面
-                    this.xuanran_httptype(type);
-                    this.xuanran_httpdata(type); //初始加载默认渲染第一个分类
+                    this.xuanran_httptype(thistype);
+                    this.xuanran_httpdata(thistype,false); //初始加载默认渲染第一个分类
 	}
 
     //添加网址
@@ -133,7 +132,7 @@ var module_http = function() {
                      // 把全局对象保存到本地.对页面重新渲染
                      this.http_save();
                      this.xuanran_httptype(new_httpobj.type);
-                     this.xuanran_httpdata(new_httpobj.type);
+                     this.xuanran_httpdata(new_httpobj.type,false);
    
 
    }
@@ -168,7 +167,7 @@ var module_http = function() {
                  // 把全局对象保存到本地.对页面重新渲染
                  this.http_save();
                  this.xuanran_httptype(type);
-                 this.xuanran_httpdata(type);
+                 this.xuanran_httpdata(type,false);
 
 
                  return false;
@@ -215,7 +214,7 @@ var module_http = function() {
         // 把全局对象保存到本地.对页面重新渲染
         this.http_save();
         this.xuanran_httptype(type);
-        this.xuanran_httpdata(type);
+        this.xuanran_httpdata(type,false);
         // console.log('上移网址成功');
         // console.log(http_data);
 
@@ -260,14 +259,14 @@ var module_http = function() {
         // 把全局对象保存到本地.对页面重新渲染
         this.http_save();
         this.xuanran_httptype(type);
-        this.xuanran_httpdata(type);
+        this.xuanran_httpdata(type,false);
         // console.log('下移网址成功');
         // console.log(http_data);
 
     }
     //根据name编辑网址
     this.http_edit = function (name) {
-        // alert(1);
+
         //显示网址编辑框
         document.getElementById('none_httpedit').style.display = 'block';
         var name = name;  //保存当前网址名称
@@ -393,19 +392,59 @@ var module_http = function() {
         // 把全局对象保存到本地.对页面重新渲染
         this.http_save();
         this.xuanran_httptype(afterobj.type);
-        this.xuanran_httpdata(afterobj.type);
+        this.xuanran_httpdata(afterobj.type,false);
 
         //修改成功后关闭网址编辑框
         alert('修改成功');
         document.getElementById('none_httpedit').style.display = 'none';
         return true;
     }
+    
+    //上滚鼠标
+    this.scollup = function () {
+        var index = null;  //获取当前分页下标
+        var arr = document.getElementsByClassName('httptitle');
+        for(var i = 0;i<arr.length;i++){
+            if(arr[i].innerHTML == thistype){
+                index = i;
+            }
+        }
+        if(index-1 < 0 || index == null){
+            return;
+        }
+        else{
+            this.httptitleclick(arr[index-1].innerHTML);
+        }
+
+    }
+    //下滚鼠标
+    this.scolldown = function () {
+        var index = null;  //获取当前分页下标
+        var arr = document.getElementsByClassName('httptitle');
+        for(var i = 0;i<arr.length;i++){
+            if(arr[i].innerHTML == thistype){
+                index = i;
+            }
+        }
+        if(index+1 == arr.length ||index == null){
+            return;
+        }
+        else{
+            this.httptitleclick(arr[index+1].innerHTML);
+        }
+
+    }
+    
     //点击网址标题后执行函数
     this.httptitleclick = function (type) {
-       //重新对分类和网址进行渲染
-      this.xuanran_httptype(type);
-      this.xuanran_httpdata(type);
+	    //将所点击的分页更新到本地
+        window.localStorage.setItem('thistype',JSON.stringify(type));
+        thistype = type;
+        //重新对分类和网址进行渲染
+        this.xuanran_httptype(type);
+        this.xuanran_httpdata(type,true);
   }  
+  
     //点击添加网址分类按钮响应函数
     this.addtitle = function () {
       var str = prompt("请输入分类名称:");
@@ -428,7 +467,6 @@ var module_http = function() {
         }
 
       var type = str.trim();
-
       // 把localstorage中数据提取到全局对象中
       var json_str = window.localStorage.getItem("mylink_http_data");
       http_data = JSON.parse(json_str);
@@ -447,12 +485,13 @@ var module_http = function() {
           type:type,
           data:[]
       });
-      // console.log('---添加网址分类成功');
-      // console.log(http_data);
+      //更新当前分类页信息
+      thistype = type;
+      window.localStorage.setItem('thistype',JSON.stringify(thistype));
       // 把全局对象保存到本地.对页面重新渲染
       this.http_save();
       this.xuanran_httptype(type);
-      this.xuanran_httpdata(type);
+      this.xuanran_httpdata(type,true);
 
 
   }
@@ -460,7 +499,7 @@ var module_http = function() {
     this.edittitle = function (type) {
         var redtype = this.gettype(); //获取当前页面的分类标题
         var beforetype = type;              //保存需要编辑的标题
-        var aftertype =  prompt('输入新的分类名称:');  //保存编辑后的标题名称
+        var aftertype =  prompt('输入新的分类名称:',beforetype);  //保存编辑后的标题名称
 
         //如果编辑的分类就是当前页面分类 那就把修改后的标题名赋值给当前标题
         if (redtype == beforetype) {
@@ -483,6 +522,7 @@ var module_http = function() {
             alert('修改失败:分类名称只能由字母数字下划线组成');
             return;
         }
+
         // 把localstorage中数据提取到全局对象中
         var json_str = window.localStorage.getItem("mylink_http_data");
         http_data = JSON.parse(json_str);
@@ -499,6 +539,11 @@ var module_http = function() {
                 http_data[i].type = aftertype;
             }
         }
+
+        //更新当前分类页信息
+        thistype = redtype;
+        window.localStorage.setItem('thistype',JSON.stringify(thistype));
+
         // 把全局对象保存到本地.对页面重新渲染
         this.http_save();
         this.xuanran_httptype(redtype); //只需要对标题数据重新渲染即可
@@ -508,9 +553,11 @@ var module_http = function() {
 
     //点击删除网址分类按钮响应函数
     this.deltitle = function (type) {
-        var redtype = this.gettype(); //获取当前页面的分类标题
+        thistype = this.gettype(); //获取当前页面的分类标题
         var type = type;              //保存需要删除的标题
-
+        if(!window.confirm('删除分类会删除该分页下所有网址，是否确认删除?')){
+            return;
+        }
         // 把localstorage中数据提取到全局对象中
         var json_str = window.localStorage.getItem("mylink_http_data");
         http_data = JSON.parse(json_str);
@@ -523,24 +570,27 @@ var module_http = function() {
             }
         }
         //如果删除的分类就是当前页面分类  那就把第一个分类做为当前页面分类进行渲染
-        if(type == redtype){
+        if(type == thistype){
             //如果数据为空就给当前分类赋值null 并重新渲染
             if(http_data.length==0){
-                redtype = null;
+                thistype = null;
+                window.localStorage.setItem('thistype',JSON.stringify(thistype));
+
                 // 把全局对象保存到本地.对页面重新渲染
                 this.http_save();
-                this.xuanran_httptype(redtype);
-                this.xuanran_httpdata(redtype);
+                this.xuanran_httptype(thistype);
+                this.xuanran_httpdata(thistype,false);
                 // console.log('删除分类成功');
                 // console.log(http_data);
             }
             //如果本地数据不为空 那就把第一个分类做为当前页面分类进行渲染
             else{
-                redtype = http_data[0].type;
+                thistype = http_data[0].type;
+                window.localStorage.setItem('thistype',JSON.stringify(thistype));
                 // 把全局对象保存到本地.对页面重新渲染
                 this.http_save();
-                this.xuanran_httptype(redtype);
-                this.xuanran_httpdata(redtype);
+                this.xuanran_httptype(thistype);
+                this.xuanran_httpdata(thistype,true);
                 // console.log('删除分类成功');
                 // console.log(http_data);
             }
@@ -549,7 +599,7 @@ var module_http = function() {
         else{
             // 把全局对象保存到本地.对页面重新渲染
             this.http_save();
-            this.xuanran_httptype(redtype);
+            this.xuanran_httptype(thistype);
             // console.log('删除分类成功');
             // console.log(http_data);
         }
@@ -670,16 +720,10 @@ var module_http = function() {
          document.getElementById('foot_fenlei').value = type;
      }
 
-    //根据更新的全局对象渲染网址内容信息
-    this.xuanran_httpdata = function(type) {
+    //根据更新的全局对象渲染网址内容信息 flag_fade为true说明渲染时显示动画效果，否则不显示
+    this.xuanran_httpdata = function(type,flag_fade) {
          //如果type值为null说明网址数据为空 不渲染数据 直接return
          if(type==null){
-             var table = document.getElementById('content');//渲染前将表格进行初始化
-             table.innerHTML = `<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>`;
              return;
          }
 
@@ -695,9 +739,8 @@ var module_http = function() {
         // console.log('---开始渲染网址内容信息');
         // console.log(data);
         var table = document.getElementById('content');//渲染前将表格进行初始化
+        table.style.display = 'none';
         table.innerHTML = `<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                            <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                            <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>`;
         var td_arr = document.querySelectorAll('#content td');//获取table中所有td标签
@@ -715,6 +758,13 @@ var module_http = function() {
                 <img style="display: none" onclick="return m_event.http_del(event)" class="http_del" src="images/http_del.png">
             </a>`
         }
+        if(flag_fade == true){
+            //将整个table淡出显示
+            $("#content").fadeIn(800);
+        }else{
+            document.getElementById('content').style.display = 'block';
+        }
+
     }
 
     //获取一个url对应的图标路径
@@ -757,6 +807,7 @@ var module_http = function() {
         var patt1=new RegExp("^[\u4e00-\u9fa50-9a-zA-Z_ ]+$");
         return(patt1.test(str));
     }
+    
     //获取当前分类标题
     this.gettype = function () {
         var arr = document.getElementsByClassName('httptitle');

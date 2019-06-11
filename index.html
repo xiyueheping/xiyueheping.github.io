@@ -15,65 +15,62 @@
 <style type="text/css">
 </style>
 </head>
-<body >
-<!-- -------------------------------背景视频和雪花特效-------------------------- -->
+<body style="">
+<div id="box">
+
+    <!-- -------------------------------背景视频和雪花特效-------------------------- -->
     <canvas id="snowFallLeft" class="snowFall snowFallLeft" height="500" ></canvas>
     <canvas id="snowFallTop" class="snowFall snowFallTop" width="1220" height="500" style="display: none;
 margin:0 auto;"  ></canvas>
     <canvas id="snowFallRight" class="snowFall snowFallRight"  height="500" ></canvas>
 
 
-<!-- **************************** 顶部导航栏中的所有信息 *************************************** -->
-<div id="top">
-     <form id="top_form" action="http://www.baidu.com/s" target="_blank">
-        <input id="top_from_search" autocomplete="off" class="form-control" autofocus="autofocus"  placeholder="输入关键词" type="text" onFocus="this.select()" name="wd">
-        <input type="submit" id="top_from_button"  value="">
-    </form>
+    <!-- **************************** 顶部导航栏中的所有信息 *************************************** -->
+    <div id="top">
+        <form id="top_form" action="http://www.baidu.com/s" target="_blank">
+            <input id="top_from_search" autocomplete="off" class="form-control" autofocus="autofocus"  placeholder="输入关键词" type="text" onFocus="this.select()" name="wd">
+            <input type="submit" id="top_from_button"  value="">
+        </form>
 
-    <div id="top_remember">备忘录</div>
-    <div id="top_translate">翻译</div>
-    <div id="top_time"></div>
-    <div id="top_city"></div>
-    <div id="top_weather"></div>
-    <div id="top_xiangqing"></div>
+        <div id="top_remember">备忘录</div>
+        <div id="top_translate">翻译</div>
+        <div id="top_time"></div>
+        <div id="top_city"></div>
+        <div id="top_weather"></div>
+        <div id="top_xiangqing"></div>
 
-</div>
+    </div>
 
-<!-- ***********************主体内容框**************************-->
-<table id="content">
-</table>
+    <!-- ***********************主体内容框**************************-->
+    <div id="content_box">
+        <table id="content">
+        </table>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-<!-- ************************底部相对位置的添加网址文本框***********************************/ -->
-<div id="foot">
-
-      <input style="background:transparent;" autocomplete="off" id="foot_input_name" class="form-control"  name="keyword" type="text" placeholder="输入名称:"  onFocus="this.select()">
-      <input style="background:transparent;" autocomplete="off" id="foot_input_href" class="form-control"  name="keyword" type="text" placeholder="https://" onFocus="this.select()">
+    <span id="none_btn_showaddwindow">+</span>
+    <!-- ************************底部相对位置的添加网址文本框***********************************/ -->
+    <div id="foot">
+        <input style="background:transparent;" autocomplete="off" id="foot_input_name" class="form-control"  name="keyword" type="text" placeholder="输入名称:"  onFocus="this.select()">
+        <input style="background:transparent;" autocomplete="off" id="foot_input_href" class="form-control"  name="keyword" type="text" placeholder="https://" onFocus="this.select()">
         <select id="foot_fenlei">
         </select>
-       <button  id="foot_addhttp" >添加</button>
+        <button class="btn btn-primary" id="foot_addhttp" >保存</button>
+    </div>
+
+    <!-- 切换搜索引擎的菜单 -->
+    <div id="none_search_nav" >
+        <a id="abd">百度搜索</a>
+        <a id="asg">搜狗搜索</a>
+        <a id="agg">谷歌搜索</a>
+        <a id="aby">必应搜索</a>
+    </div>
 </div>
+
 
 
 <!--********************************** 隐藏的页面元素 ****************************************-->
 
-<!-- 切换搜索引擎的菜单 -->
-<div id="none_search_nav" >
-    <a id="abd">百度搜索</a>
-    <a id="asg">搜狗搜索</a>
-    <a id="agg">谷歌搜索</a>
-    <a id="aby">必应搜索</a>
-</div>
+
 <!--右上角网址分类标题菜单-->
 <ul id="none_httptitle_nav">
 </ul>

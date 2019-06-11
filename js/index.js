@@ -14,4 +14,6 @@ window.onload = function () {
     m_event.keydown(); //处理所有回车事件
 
     m_event.youjian(); //处理所有鼠标右键事件
+
+    m_event.scroll();  //鼠标滚动事件响应
 }

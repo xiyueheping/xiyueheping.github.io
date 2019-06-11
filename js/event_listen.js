@@ -25,22 +25,69 @@ var module_event = function() {
     this.onloadevent = function () {
 
            m_snow.snow();                      //执行雪花效果
-           m_cityweather.showcityweather(); //加载地点天气信息进行渲染
+           // m_cityweather.showcityweather(); //加载地点天气信息进行渲染
            m_time.settime();               //获取系统时间并渲染
            m_search.setsearch();           //加载页面执行设置搜索引擎函数
            m_search.search_qiehuan();      //注册与搜索引擎有关的事件
            m_http.http_chushihua();         //初始化本地网址数据 进行渲染
 
+           //添加网址框的显示与隐藏控制
+           $("#none_btn_showaddwindow").click(function(){
+            $("#foot").slideToggle("slow");
+           });
+
+
 
     }
+    //整屏滚动切换
+    this.scroll = function () {
 
+        var moveinout = this.moveinout;
+
+        //监听鼠标滚动事件
+        var timer = null;
+        $(document).on("mousewheel DOMMouseScroll", function(e) {
+
+
+            var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie
+                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1)); // firefox
+
+            if (delta > 0) {
+
+                // 只执行100毫秒之内触发的最后一个事件
+                if(timer != null){
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(function () {
+
+                   m_http.scollup();
+                   moveinout(); // 重新注册移入移出事件
+
+
+                },100);
+            }
+            else if (delta < 0) {
+
+                if(timer != null){
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(function () {
+                 m_http.scolldown();
+                 moveinout(); // 重新注册移入移出事件
+
+                },100);
+
+            }
+        });
+
+    }
 
     //由网址标题html元素注册的点击事件
     this.httptitle_click = function (event) {
         // console.log(event.target.style.color);
         //如果点击的标题不是当前页面分类执行httptitleclick函数
         if(event.target.style.color == 'black'){
-
             m_http.httptitleclick(event.target.innerText);
             this.moveinout(); // 重新注册移入移出事件
         }
