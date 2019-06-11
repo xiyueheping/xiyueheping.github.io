@@ -10,10 +10,7 @@
  */
 body{
     position: relative;
-    /*border: #2b542c 1px solid;*/
-    /*width: 1300px;*/
-    /*margin: auto;*/
-    background: url("../images/bg.jpg") no-repeat center;
+    background: url("../images/bg.jpg") no-repeat top;
     overflow: hidden;
 }
 #box{

@@ -55,11 +55,11 @@ a:visited{
 
 
     /*border: #ffffff 1px solid;*/
+    color:#45b465;
+    /*color: #3bb15c;*/
+    /*border: #00ffff 1px solid;*/
 
-    color: #00ffff;
-    border: #00ffff 1px solid;
-
-    /*background-color: #0e88eb;*/
+    background-color: #ffffff;
     /*background-image: url("../images/httpimg.png");*/
 }
 
@@ -82,7 +82,7 @@ a:visited{
     margin-top: 5px;
     text-align: center;
     font-size: 12px;
-    color: #000;
+    color: #fff;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
