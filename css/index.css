@@ -21,8 +21,8 @@ a:visited{
     position: relative;
    display: block;
    margin: 0 auto;
-   width: 110px;
-    height: 110px;
+   width: 125px;
+    height: 125px;
     padding-top: 15px;
     text-align: center;
     border-radius: 5px;
@@ -32,25 +32,19 @@ a:visited{
 }
 
 .httpimg{
-    /*display: block;*/
-    border-radius: 10px;
-    width: 70px;
-    height: 70px;
-    color: red;font-size: 22px;
-    line-height: 70px;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
+    border-radius: 15px;
+    width: 90px;
+    height: 90px;
 }
 /*图片加载不出来的代替样式*/
 .httpimg2{
 
     display: inline-block;
-    border-radius: 10px;
-    width: 70px;
-    height: 70px;
+    border-radius: 15px;
+    width: 90px;
+    height: 90px;
     font-size: 35px;
-    line-height: 70px;
+    line-height: 90px;
     font-family: 华文楷体;
 
 

@@ -740,9 +740,9 @@ var module_http = function() {
         // console.log(data);
         var table = document.getElementById('content');//渲染前将表格进行初始化
         table.style.display = 'none';
-        table.innerHTML = `<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                           <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>`;
+        table.innerHTML = `<tr><td></td><td></td><td></td><td></td><td></td></tr>
+                           <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                           <tr><td></td><td></td><td></td><td></td><td></td></tr>`;
         var td_arr = document.querySelectorAll('#content td');//获取table中所有td标签
 
         //对网址可用空间进行检验

@@ -5,6 +5,7 @@
 /*设置左上角网址标题菜单样式*/
 #none_httptitle_nav{
     list-style-type: none;
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     margin: 0;
     padding: 0;
     width: 110px;
@@ -49,10 +50,11 @@
 /*顶部搜索框下方隐藏菜单样式*/
 #none_search_nav{
     width:95px;
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     z-index:100;
     position: absolute;
     left: 802px;
-    top:53px;
+    top:60px;
     display: none;
     z-index: 9999;
 }
@@ -74,6 +76,7 @@
 
 /************************隐藏网址编辑框样式***********************************************/
 #none_httpedit{
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     z-index: 9000;
     color:black;
     background-color: #ffffff;
@@ -147,6 +150,7 @@
 
 /******************************隐藏的备忘录框框***********************************/
 #none_remember{
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     color:black;
     background-color: #ffffff;
     height:480px;
@@ -186,6 +190,7 @@
 
 /********************************隐藏的翻译弹框-->*********************************/
 #none_trans{
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     color:black;
     background-color: #ffffff;
     height:480px;
@@ -242,6 +247,7 @@
 #none_tianqixiangqing{
     color:black;
     background-color: #ffffff;
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     height:480px;
     width: 540px;
 
@@ -287,7 +293,7 @@
     width:100px;z-index:100;
     right: 410px;
     top:53px;
-
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     position: fixed;/*//事件点击位置判断是根据窗口固定距离，所以右键菜单也应该是固定定位*/
     display: none;
 }
@@ -310,9 +316,11 @@
 
 /*右键分类菜单样式*/
 #none_menu_fenlei{
+    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
     width:100px;z-index:100;right: 410px;top:53px;
     position: fixed;/*//事件点击位置判断是根据窗口固定距离，所以右键菜单也应该是固定定位*/
     display: none;
+
 }
 #none_menu_fenlei a{
     color: black;
@@ -331,20 +339,18 @@
 
 }
 #none_btn_showaddwindow{
-    font-size: 80px;
-    line-height: 80px;
-    text-align: center;
+
     border-radius: 40px;
     cursor: pointer;
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    color: #1ece6d;
+    bottom: 40px;
+    right: 40px;
+    /*color: #1ece6d;*/
     display: inline-block;
-    border: 1px solid #1ece6d;
-    width: 80px;
-    height: 80px;
+    transition: all .3s ease;
+    width: 90px;
+    height: 90px;
 }
 #none_btn_showaddwindow:hover{
-    box-shadow: 0 0 5px 0 #1ece6d;
+    transform: scale(1.1);
 }

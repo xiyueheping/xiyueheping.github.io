@@ -34,20 +34,23 @@ body{
    主体内容框的布局
  */
 #content_box{
-    width: 1000px;height: 500px;
+    width: 1000px;height: 540px;
     margin: 0 auto;
-
+    /*background: #fffbe3;*/
 }
 #content{
     margin: 0 auto;
     width: 1000px;
-    height: 500px;
+    width: 900px;
+    height: 480px;
     margin-bottom: 60px;
+    /*background: #a6e1ec;*/
 }
 #content td{
     /*border: #00ec00 1px solid;*/
-    width: 166px;
-    height: 166px;
+    width: 200px;
+    width: 180px;
+    height: 160px;
 }
 
 /**
@@ -59,10 +62,13 @@ body{
     position: fixed;
     left: 0px;
     right: 0px;
-    bottom: 20px;
+    bottom: 15px;
     margin: 0 auto;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     display: none;
+    /*background: #fff;*/
+    /*box-shadow: 0 0 20px 0 rgba(113,113,113,.8);*/
+    /*border: rgb(113,113,113) 1px solid;*/
 }
 
 /**
