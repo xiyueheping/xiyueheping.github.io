@@ -26,7 +26,7 @@ var module_event = function() {
 
            document.getElementsByTagName('body')[0].style.height = window.innerHeight + 'px';
            m_snow.snow();                      //执行雪花效果
-           // m_cityweather.showcityweather(); //加载地点天气信息进行渲染
+           m_cityweather.showcityweather(); //加载地点天气信息进行渲染
            m_time.settime();               //获取系统时间并渲染
            m_search.setsearch();           //加载页面执行设置搜索引擎函数
            m_search.search_qiehuan();      //注册与搜索引擎有关的事件
