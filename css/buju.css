@@ -10,7 +10,8 @@
  */
 body{
     position: relative;
-    background: url("../images/bg.jpg") no-repeat top;
+    background: url("../images/bg.jpg") no-repeat;
+    background-size:100% 100%;
     overflow: hidden;
 }
 #box{
@@ -64,11 +65,7 @@ body{
     right: 0px;
     bottom: 15px;
     margin: 0 auto;
-    /*border-radius: 5px;*/
     display: none;
-    /*background: #fff;*/
-    /*box-shadow: 0 0 20px 0 rgba(113,113,113,.8);*/
-    /*border: rgb(113,113,113) 1px solid;*/
 }
 
 /**

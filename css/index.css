@@ -16,8 +16,6 @@ a:visited{
 /***************************主体内容框中的表格样式***********************/
 
 #content a{
-
-   /*border: #00c6ff 1px solid;*/
     position: relative;
    display: block;
    margin: 0 auto;
@@ -38,23 +36,15 @@ a:visited{
 }
 /*图片加载不出来的代替样式*/
 .httpimg2{
-
     display: inline-block;
     border-radius: 15px;
     width: 90px;
     height: 90px;
-    font-size: 35px;
+    font-size: 45px;
     line-height: 90px;
     font-family: 华文楷体;
-
-
-    /*border: #ffffff 1px solid;*/
     color:#45b465;
-    /*color: #3bb15c;*/
-    /*border: #00ffff 1px solid;*/
-
     background-color: #ffffff;
-    /*background-image: url("../images/httpimg.png");*/
 }
 
 .http_del{
@@ -62,7 +52,6 @@ a:visited{
     position: absolute;
     top: 2px;
     right: 2px;
-
 }
 .http_del:hover{
 
