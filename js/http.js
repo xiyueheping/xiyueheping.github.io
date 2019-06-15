@@ -804,7 +804,7 @@ var module_http = function() {
      }
     //如果一个字符串只能由字母数字下划线空格组成且不是空字符串便返回true
     function teststr(str){
-        var patt1=new RegExp("^[\u4e00-\u9fa50-9a-zA-Z_ ]+$");
+        var patt1=new RegExp("^[\u4e00-\u9fa50-9a-zA-Z\_ ]+$");
         return(patt1.test(str));
     }
     
