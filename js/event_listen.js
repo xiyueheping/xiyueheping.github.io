@@ -133,6 +133,33 @@ var module_event = function() {
         document.getElementById('top_remember').onclick = m_remember.showremember;
         //点击翻译按钮响应事件
         document.getElementById('top_translate').onclick = m_trans.showtrans;
+
+        //点击阴影部分关闭已打开弹窗
+        document.getElementById('window_bg').onclick = function(event){
+            //如果天气详情弹窗已打开 就关闭它
+            if(document.getElementById('none_tianqixiangqing').style.display!=='none'){
+                $("#window_bg").fadeOut(300);
+                $("#none_tianqixiangqing").slideUp(300);
+                console.log('---关闭天气详情窗口');
+            }
+            //如果备忘录弹窗已打开 就关闭它
+            if(document.getElementById('none_remember').style.display!=='none'){
+                $("#window_bg").fadeOut(300);
+                $("#none_remember").slideUp(300);
+                console.log('---关闭备忘录窗口');
+            }
+            //如果翻译弹窗已打开 就关闭它
+            if(document.getElementById('none_trans').style.display!=='none'){
+                $("#window_bg").fadeOut(300);
+                $("#none_trans").slideUp(300);
+                console.log('---关闭翻译窗口');
+            }
+
+
+            event.stopPropagation();
+        }
+
+
         //点击备忘录窗口关闭按钮响应事件
         document.getElementById('remember_close').onclick = m_remember.saveremember;
         //点击翻译窗口关闭按钮响应事件
@@ -208,37 +235,38 @@ var module_event = function() {
             moveinout(); // 重新注册移入移出事件
 
         }
-        //点击主文档对象响应事件
-        document.onclick = function (event) {
-            //如果备忘录窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
-            if(document.getElementById('none_remember').style.display=='block'){
-                if(event.target.id == 'none_remember'||event.target.id == 'remember_textword'||event.target.id == 'remember_title'){
-                    return;
-                }
-                m_remember.saveremember();
-            }
-            //如果翻译窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
-            if (document.getElementById('none_trans').style.display=='block'){
-                if(event.target.id == 'trans_from'||event.target.id == 'trans_to'||event.target.id == 'none_trans'
-                ||event.target.id == 'trans_title'){
-                    return;
-                }
-              m_trans.close();
-            }
-            //如果网址编辑窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
-            if (document.getElementById('none_httpedit').style.display=='block'){
-
-               //如果点在窗口内部直接返回
-                if(event.target.id == 'none_httpedit'||
-                    document.getElementById('none_httpedit').contains(event.target)){
-                    return;
-                }
-                //否则执行关闭操作
-                document.getElementById('none_httpedit').style.display = 'none';
-
-
-            }
-        }
+        
+        // //点击主文档对象响应事件
+        // document.onclick = function (event) {
+        //     //如果备忘录窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
+        //     if(document.getElementById('none_remember').style.display=='block'){
+        //         if(event.target.id == 'none_remember'||event.target.id == 'remember_textword'||event.target.id == 'remember_title'){
+        //             return;
+        //         }
+        //         m_remember.saveremember();
+        //     }
+        //     //如果翻译窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
+        //     if (document.getElementById('none_trans').style.display=='block'){
+        //         if(event.target.id == 'trans_from'||event.target.id == 'trans_to'||event.target.id == 'none_trans'
+        //         ||event.target.id == 'trans_title'){
+        //             return;
+        //         }
+        //       m_trans.close();
+        //     }
+        //     //如果网址编辑窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
+        //     if (document.getElementById('none_httpedit').style.display=='block'){
+        //
+        //        //如果点在窗口内部直接返回
+        //         if(event.target.id == 'none_httpedit'||
+        //             document.getElementById('none_httpedit').contains(event.target)){
+        //             return;
+        //         }
+        //         //否则执行关闭操作
+        //         document.getElementById('none_httpedit').style.display = 'none';
+        //
+        //
+        //     }
+        // }
 
 
 

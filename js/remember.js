@@ -3,8 +3,10 @@ var module_remember = function(){
 	this.showremember = function(e){
 
              //显示备忘录窗口
-	         document.getElementById('none_remember').style.display = 'block';
-             // console.log('---打开了备忘录窗口');
+             $("#window_bg").fadeIn(300);
+             $("#none_remember").slideDown(300);
+
+             console.log('---打开了备忘录窗口');
              //读取键为remember的本地信息
              var value = localStorage.getItem("mylink_remember");
              //如果本地没有信息，对本地初始化
@@ -28,8 +30,10 @@ var module_remember = function(){
         //存储信息
         window.localStorage.setItem("mylink_remember",str);
         //再次隐藏备忘录窗口
-        document.getElementById('none_remember').style.display = 'none';
-        // console.log('---关闭了备忘录窗口');
+        $("#none_remember").slideUp(300);
+        $("#window_bg").fadeOut(300);
+        // document.getElementById('window_bg').style.display = 'none';
+        console.log('---关闭了备忘录窗口');
     }
 
 }

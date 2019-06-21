@@ -3,17 +3,11 @@ var module_trans = function(){
 	
 	//点击翻译按钮响应此函数
 	this.showtrans = function(e){
-	    //如果此时翻译窗口已经打开了 就将其关闭
-	    if (document.getElementById('none_trans').style.display == 'block') {
-            document.getElementById('none_trans').style.display = 'none';
-            console.log('---关闭了翻译窗口');
-            return;
-        }
-	    else if(document.getElementById('none_trans').style.display == 'none'){
+
             //显示翻译窗口
-            document.getElementById('none_trans').style.display = 'block';
+            $("#window_bg").fadeIn(300);
+            $("#none_trans").slideDown(300);
             console.log('---打开了翻译窗口');
-        }
 
         //阻止事件冒泡，防止第一次点击翻译按钮就关闭翻译窗口
         e.stopPropagation();
@@ -21,7 +15,8 @@ var module_trans = function(){
 	//点击翻译窗口关闭按钮响应此函数
     this.close = function () {
 	    //隐藏翻译窗口
-        document.getElementById('none_trans').style.display = 'none';
+        $("#window_bg").fadeOut(300);
+        $("#none_trans").slideUp(300);
         console.log('---关闭翻译窗口');
     }
     //点击回车后 响应此函数 开始请求翻译数据并渲染

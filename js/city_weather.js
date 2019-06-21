@@ -76,8 +76,13 @@ var module_city_weather = function() {
              }
              // console.log(json_data_weather);
              //显示天气详情窗口
-             document.getElementById('none_tianqixiangqing').style.display = 'block';
-             // console.log('---打开了天气详情窗口');
+             // document.getElementById('none_tianqixiangqing').style.display = 'block';
+             $("#none_tianqixiangqing").slideDown(300);
+             $("#window_bg").fadeIn(300);
+             console.log('打开了天气详情窗口');
+
+
+
              //根据天气详情数据渲染整个表格
              var obj = json_data_weather;
              var array_datedom = document.getElementsByClassName('date');
@@ -98,8 +103,9 @@ var module_city_weather = function() {
         }
      //点击天气详情关闭按钮响应此函数
     this.closexiangqing = function () {
-        document.getElementById('none_tianqixiangqing').style.display = 'none';
-        // console.log('---关闭天气详情窗口');
+        $("#window_bg").fadeOut(300);
+        $("#none_tianqixiangqing").slideUp(300);
+        console.log('---关闭天气详情窗口');
     }
 
 
