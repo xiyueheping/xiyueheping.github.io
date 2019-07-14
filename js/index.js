@@ -10,8 +10,8 @@ function daochu(){
     var data4 = window.localStorage.getItem('mylink_search');
     var str = `window.localStorage.setItem('mylink_http_data','${data1}');
                window.localStorage.setItem('thistype','${data2}');
-               window.localStorage.setItem('mylink_remember','${data3}');
-               window.localStorage.getItem('mylink_search','${data4}');`
+               window.localStorage.setItem('mylink_remember',\`${data3}\`);
+               window.localStorage.setItem('mylink_search','${data4}');`
  
     console.log(str)
 }
