@@ -671,6 +671,7 @@ var module_http = function() {
         // console.log('---下移分类成功');
         // console.log(http_data);
     }
+
      /*****基本函数，供上层函数调用******/
      //根据更新的全局对象渲染网址分类标题信息
      this.xuanran_httptype = function(type) {

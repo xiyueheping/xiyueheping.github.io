@@ -235,7 +235,7 @@ var module_event = function() {
             moveinout(); // 重新注册移入移出事件
 
         }
-        
+
         // //点击主文档对象响应事件
         // document.onclick = function (event) {
         //     //如果备忘录窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
