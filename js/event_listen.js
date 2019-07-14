@@ -48,7 +48,11 @@ var module_event = function() {
         //监听鼠标滚动事件
         var timer = null;
         $(document).on("mousewheel DOMMouseScroll", function(e) {
-
+           
+            //如果有窗口打开，存在阴影 禁止滚动
+            if(document.getElementById('window_bg').style.display!='none'){
+                return;
+            }
 
             var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie
                 (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1)); // firefox
@@ -138,21 +142,18 @@ var module_event = function() {
         document.getElementById('window_bg').onclick = function(event){
             //如果天气详情弹窗已打开 就关闭它
             if(document.getElementById('none_tianqixiangqing').style.display!=='none'){
-                $("#window_bg").fadeOut(300);
-                $("#none_tianqixiangqing").slideUp(300);
+                m_cityweather.closexiangqing();
                 console.log('---关闭天气详情窗口');
             }
             //如果备忘录弹窗已打开 就关闭它
             if(document.getElementById('none_remember').style.display!=='none'){
-                $("#window_bg").fadeOut(300);
-                $("#none_remember").slideUp(300);
-                console.log('---关闭备忘录窗口');
+                m_remember.saveremember()
+   
             }
             //如果翻译弹窗已打开 就关闭它
             if(document.getElementById('none_trans').style.display!=='none'){
-                $("#window_bg").fadeOut(300);
-                $("#none_trans").slideUp(300);
-                console.log('---关闭翻译窗口');
+                m_trans.close();
+
             }
 
 
