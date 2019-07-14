@@ -41,7 +41,7 @@ var module_http = function() {
                          // console.log('---初始化本地网址数据');
                          var str_type = JSON.stringify(http_data);
                          window.localStorage.setItem('mylink_http_data',str_type);
-                         window.localStorage.setItem('thistype',JSON.stringify(http_data[0].type));
+                         window.localStorage.setItem('thistype',http_data[0].type);
                      }
 
 
@@ -50,7 +50,7 @@ var module_http = function() {
                      http_data = JSON.parse(json_str);
 
                      //记录当前页面需要渲染的分类
-                     thistype = JSON.parse(window.localStorage.getItem("thistype"));
+                     thistype = window.localStorage.getItem("thistype");
                      // console.log(thistype);
 
 
