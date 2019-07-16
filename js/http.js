@@ -388,7 +388,9 @@ var module_http = function() {
             // console.log(http_data);
 
         }
-
+        
+        //改变当前网址分页内容
+        thistype = afterobj.type
         // 把全局对象保存到本地.对页面重新渲染
         this.http_save();
         this.xuanran_httptype(afterobj.type);
@@ -782,6 +784,7 @@ var module_http = function() {
     this.http_save = function(){
            var str = JSON.stringify(http_data);//把json对象转换成字符串
            window.localStorage.setItem('mylink_http_data',str);
+           window.localStorage.setItem('thistype',thistype);
      }
     //网址信息验证 传入网址信息，返回验证结果
     this.check_http = function(new_httpobj){
@@ -819,4 +822,3 @@ var module_http = function() {
         }
     }
 }
-
