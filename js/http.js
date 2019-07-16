@@ -395,7 +395,7 @@ var module_http = function() {
         this.xuanran_httpdata(afterobj.type,false);
 
         //修改成功后关闭网址编辑框
-        alert('修改成功');
+        // alert('修改成功');
         document.getElementById('none_httpedit').style.display = 'none';
         return true;
     }
@@ -438,7 +438,7 @@ var module_http = function() {
     //点击网址标题后执行函数
     this.httptitleclick = function (type) {
 	    //将所点击的分页更新到本地
-        window.localStorage.setItem('thistype',JSON.stringify(type));
+        window.localStorage.setItem('thistype',type);
         thistype = type;
         //重新对分类和网址进行渲染
         this.xuanran_httptype(type);
@@ -487,7 +487,7 @@ var module_http = function() {
       });
       //更新当前分类页信息
       thistype = type;
-      window.localStorage.setItem('thistype',JSON.stringify(thistype));
+      window.localStorage.setItem('thistype',thistype);
       // 把全局对象保存到本地.对页面重新渲染
       this.http_save();
       this.xuanran_httptype(type);
@@ -542,7 +542,7 @@ var module_http = function() {
 
         //更新当前分类页信息
         thistype = redtype;
-        window.localStorage.setItem('thistype',JSON.stringify(thistype));
+        window.localStorage.setItem('thistype',thistype);
 
         // 把全局对象保存到本地.对页面重新渲染
         this.http_save();
@@ -574,7 +574,7 @@ var module_http = function() {
             //如果数据为空就给当前分类赋值null 并重新渲染
             if(http_data.length==0){
                 thistype = null;
-                window.localStorage.setItem('thistype',JSON.stringify(thistype));
+                window.localStorage.setItem('thistype',thistype);
 
                 // 把全局对象保存到本地.对页面重新渲染
                 this.http_save();
@@ -586,7 +586,7 @@ var module_http = function() {
             //如果本地数据不为空 那就把第一个分类做为当前页面分类进行渲染
             else{
                 thistype = http_data[0].type;
-                window.localStorage.setItem('thistype',JSON.stringify(thistype));
+                window.localStorage.setItem('thistype',thistype);
                 // 把全局对象保存到本地.对页面重新渲染
                 this.http_save();
                 this.xuanran_httptype(thistype);
