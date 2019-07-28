@@ -7,27 +7,37 @@
  * 基本函数：无
  */
 var module_event = function() {
+
     //导入雪花效果模块
     var m_snow = new module_snow();
-    //导入系统时间模块
-    var m_time = new module_time();
-    //导入地点天气模块
+
+    //导入日期天气模块
     var m_cityweather = new module_city_weather();
+
     //导入搜索引擎模块
     var m_search = new module_serch();
     //导入网址数据处理模块
     var m_http = new module_http();
-    //导入备忘录模块
-    var m_remember = new module_remember();
+
+
     //导入翻译模块
     var m_trans = new module_trans();
+
+
     //主onload事件注册
     this.onloadevent = function () {
 
            document.getElementsByTagName('body')[0].style.height = window.innerHeight + 'px';
            m_snow.snow();                      //执行雪花效果
+
+
            m_cityweather.showcityweather();    //加载地点天气信息进行渲染
-           m_time.settime();                   //获取系统时间并渲染
+           //间歇调用，每隔一个小时重新刷新一次天气日期信息
+           setInterval(function(){
+               m_cityweather.showcityweather();
+           },1000*60*60)
+           
+
            m_search.setsearch();               //加载页面执行设置搜索引擎函数
            m_search.search_qiehuan();          //注册与搜索引擎有关的事件
            m_http.http_chushihua();            //初始化本地网址数据 进行渲染
@@ -133,8 +143,7 @@ var module_event = function() {
 
         //点击天气详情按钮响应事件
         document.getElementById('top_xiangqing').onclick = m_cityweather.showtianqi;
-        //点击备忘录按钮响应事件
-        document.getElementById('top_remember').onclick = m_remember.showremember;
+    
         //点击翻译按钮响应事件
         document.getElementById('top_translate').onclick = m_trans.showtrans;
 
@@ -145,11 +154,7 @@ var module_event = function() {
                 m_cityweather.closexiangqing();
                 console.log('---关闭天气详情窗口');
             }
-            //如果备忘录弹窗已打开 就关闭它
-            if(document.getElementById('none_remember').style.display!=='none'){
-                m_remember.saveremember()
-   
-            }
+            
             //如果翻译弹窗已打开 就关闭它
             if(document.getElementById('none_trans').style.display!=='none'){
                 m_trans.close();
@@ -161,8 +166,6 @@ var module_event = function() {
         }
 
 
-        //点击备忘录窗口关闭按钮响应事件
-        document.getElementById('remember_close').onclick = m_remember.saveremember;
         //点击翻译窗口关闭按钮响应事件
         document.getElementById('trans_close').onclick = m_trans.close;
         //点击天气详情窗口关闭按钮响应事件
@@ -236,40 +239,6 @@ var module_event = function() {
             moveinout(); // 重新注册移入移出事件
 
         }
-
-        // //点击主文档对象响应事件
-        // document.onclick = function (event) {
-        //     //如果备忘录窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
-        //     if(document.getElementById('none_remember').style.display=='block'){
-        //         if(event.target.id == 'none_remember'||event.target.id == 'remember_textword'||event.target.id == 'remember_title'){
-        //             return;
-        //         }
-        //         m_remember.saveremember();
-        //     }
-        //     //如果翻译窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
-        //     if (document.getElementById('none_trans').style.display=='block'){
-        //         if(event.target.id == 'trans_from'||event.target.id == 'trans_to'||event.target.id == 'none_trans'
-        //         ||event.target.id == 'trans_title'){
-        //             return;
-        //         }
-        //       m_trans.close();
-        //     }
-        //     //如果网址编辑窗口处于打开状态并且点击了窗口之外的元素 就将其关闭
-        //     if (document.getElementById('none_httpedit').style.display=='block'){
-        //
-        //        //如果点在窗口内部直接返回
-        //         if(event.target.id == 'none_httpedit'||
-        //             document.getElementById('none_httpedit').contains(event.target)){
-        //             return;
-        //         }
-        //         //否则执行关闭操作
-        //         document.getElementById('none_httpedit').style.display = 'none';
-        //
-        //
-        //     }
-        // }
-
-
 
     }
 

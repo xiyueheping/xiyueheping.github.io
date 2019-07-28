@@ -33,9 +33,9 @@ margin:0 auto;"  ></canvas>
             <input type="submit" id="top_from_button"  value="">
         </form>
 
-        <div id="top_remember">备忘录</div>
+        <div id="top_date"></div>
+        <div id="top_week"></div>
         <div id="top_translate">翻译</div>
-        <div id="top_time"></div>
         <div id="top_city"></div>
         <div id="top_weather"></div>
         <div id="top_xiangqing"></div>
@@ -48,7 +48,6 @@ margin:0 auto;"  ></canvas>
         </table>
     </div>
 
-    <!--<span id="none_btn_showaddwindow">+</span>-->
     <img id="none_btn_showaddwindow" src="images/img_addhttp.png" style="">
     <!-- ************************底部相对位置的添加网址文本框***********************************/ -->
     <div id="foot">
@@ -111,13 +110,6 @@ margin:0 auto;"  ></canvas>
        <img id="none_edit_close" onclick="http_edit_close()"  src="images/edit_close.png" >
    </form>
 
-<!-- 点击备忘录按钮后显示此编辑框 -->
-<form id="none_remember" style="display: none;">
-    <div id="remember_title" style="">备忘录</div>
-    <textarea id="remember_textword" name="word">
-    </textarea>
-    <img id="remember_close"   src="images/edit_close.png" >
-</form>
 
 <!--点击翻译按钮后响应此弹框-->
 <form id="none_trans" style="display: none;">
@@ -148,7 +140,7 @@ margin:0 auto;"  ></canvas>
                 风向
             </th>
             <th>
-                风力
+                风速
             </th>
 
         </tr>
@@ -284,10 +276,8 @@ margin:0 auto;"  ></canvas>
 <script type="text/javascript" src="js/snow.js"></script>
 
 
-<script type="text/javascript" src ="js/settime.js"></script>
 <script type="text/javascript" src ="js/city_weather.js"></script>
 <script type="text/javascript" src ="js/search.js"></script>
-<script type="text/javascript" src ="js/remember.js"></script>
 <script type="text/javascript" src ="js/http.js"></script>
 <script type="text/javascript" src ="js/trans.js"></script>
 <script type="text/javascript" src="js/event_listen.js"></script>

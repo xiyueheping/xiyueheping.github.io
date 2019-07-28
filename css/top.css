@@ -38,46 +38,47 @@
 
 }
 
-/*顶部导航栏中备忘录 翻译 样式*/
-
-#top_remember{
+/*顶部导航栏中日期 星期 翻译 样式*/
+#top_date{
     font-size: 15px;
     position: absolute;
     top:17px;
-    left: 230px;
+    left: 170px;
+    cursor:pointer;
+}
+#top_week{
+    font-size: 15px;
+    position: absolute;
+    top:17px;
+    left: 260px;
     cursor:pointer;
 }
 #top_translate{
     font-size: 15px;
     position: absolute;
     top:17px;
-    left: 320px;
+    left: 330px;
     cursor:pointer;
 }
 
-/*顶部导航栏中时间城市天气样式*/
-#top_time{
+/*顶部导航栏中 城市 天气 温度 详情样式*/
+
+#top_city{
     font-size: 15px;
     position: absolute;
     top:17px;
     left: 950px;
 }
-#top_city{
+#top_weather{
     font-size: 15px;
     position: absolute;
     top:17px;
     left: 1020px;
 }
-#top_weather{
-    font-size: 15px;
-    position: absolute;
-    top:17px;
-    left: 1065px;
-}
 #top_xiangqing{
     font-size: 15px;
     position: absolute;
     top:17px;
-    left: 1190px;
+    left: 1210px;
     cursor:pointer;
 }
