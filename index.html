@@ -5,22 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@mylink@</title>
 <!--<link href="/favicon.ico" rel="shortcut icon">-->
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/buju.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/top.css">
-<link rel="stylesheet" type="text/css" href="css/foot.css">
-<link rel="stylesheet" type="text/css" href="css/none.css">
-<style>
+<link rel="stylesheet" type="text/css" href="src/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="src/css/buju.css">
+<link rel="stylesheet" type="text/css" href="src/css/index.css">
+<link rel="stylesheet" type="text/css" href="src/css/top.css">
+<link rel="stylesheet" type="text/css" href="src/css/foot.css">
+<link rel="stylesheet" type="text/css" href="src/css/none.css">
 
-</style>
-<style type="text/css">
-</style>
 </head>
 <body>
 <div id="box">
 
-    <!-- -------------------------------背景视频和雪花特效-------------------------- -->
+    <!-- -------------------------------雪花特效-------------------------- -->
     <canvas id="snowFallLeft" class="snowFall snowFallLeft" height="500" ></canvas>
     <canvas id="snowFallTop" class="snowFall snowFallTop" width="1220" height="500" style="display: none;
 margin:0 auto;"  ></canvas>
@@ -48,7 +44,7 @@ margin:0 auto;"  ></canvas>
         </table>
     </div>
 
-    <img id="none_btn_showaddwindow" src="images/img_addhttp.png" style="">
+    <img id="none_btn_showaddwindow" src="src/images/img_addhttp.png" style="">
     <!-- ************************底部相对位置的添加网址文本框***********************************/ -->
     <div id="foot">
         <input style="background:transparent;" autocomplete="off" id="foot_input_name" class="form-control"  name="keyword" type="text" placeholder="输入名称:"  onFocus="this.select()">
@@ -107,7 +103,7 @@ margin:0 auto;"  ></canvas>
        <div style="margin-top:35px;">
         <button class="btn btn-primary" onclick="return m_event.http_querenxiugai()" id="none_btn_xiugai">确认修改</button>
        </div>
-       <img id="none_edit_close" onclick="http_edit_close()"  src="images/edit_close.png" >
+       <img id="none_edit_close" onclick="http_edit_close()"  src="src/images/edit_close.png" >
    </form>
 
 
@@ -116,7 +112,7 @@ margin:0 auto;"  ></canvas>
     <div id="trans_title" style="">翻译</div>
     <textarea id="trans_from" name="word"  placeholder="输入待翻译文本"></textarea>
     <textarea id="trans_to" name="word"  style=""></textarea>
-    <img id="trans_close"   src="images/edit_close.png" >
+    <img id="trans_close"   src="src/images/edit_close.png" >
 </form>
 
 
@@ -265,21 +261,12 @@ margin:0 auto;"  ></canvas>
             </td>
         </tr>
     </table>
-    <img id="tianqixiangqing_close"   src="images/edit_close.png" >
+    <img id="tianqixiangqing_close"   src="src/images/edit_close.png" >
 </form>
 
 <div id="window_bg" style="display: none"></div>
 </body>
-<script type="text/javascript" src ="js/jquery-3.2.0.js"></script>
-
-<script type="text/javascript" src="js/md5.js"></script>
-<script type="text/javascript" src="js/snow.js"></script>
 
 
-<script type="text/javascript" src ="js/city_weather.js"></script>
-<script type="text/javascript" src ="js/search.js"></script>
-<script type="text/javascript" src ="js/http.js"></script>
-<script type="text/javascript" src ="js/trans.js"></script>
-<script type="text/javascript" src="js/event_listen.js"></script>
-<script type="text/javascript" src ="js/index.js"></script>
+<script type="module" src ="src/js/index.js"></script>
 </html>
