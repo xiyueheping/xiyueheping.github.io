@@ -1,0 +1,79 @@
+/*
+  body:  最外层的容器    宽度1300px 居中 高度自适应       相对定位
+  #top:  最上方导航栏    宽度1300px 高度60                相对定位
+  #content: 主体内容框   宽度1000px 居中 高度500px  默认定位
+  #foot:  底部菜单栏    宽度1300px 高度 55px 相对定位
+*/
+
+/**
+  最外层的body容器布局
+ */
+body{
+    position: relative;
+    background: url("../images/bg.jpg") no-repeat;
+    background-size:100% 100%;
+    overflow: hidden;
+
+}
+#box{
+    position: relative;
+    width: 1300px;
+    margin: 0 auto;
+    /*border: #00c6ff 1px solid;*/
+    overflow: hidden;
+}
+/**
+  最上方导航栏布局
+ */
+#top{
+    position: relative;
+    margin-top: 5px;
+    width: 1300px;
+    height: 60px;
+}
+
+/**
+   主体内容框的布局
+ */
+#content_box{
+    width: 1000px;height: 540px;
+    margin: 0 auto;
+    /*background: #fffbe3;*/
+}
+#content{
+    margin: 0 auto;
+    width: 1000px;
+    width: 900px;
+    height: 480px;
+    margin-bottom: 60px;
+    /*background: #a6e1ec;*/
+}
+#content td{
+    /*border: #00ec00 1px solid;*/
+    width: 200px;
+    width: 180px;
+    height: 160px;
+}
+
+/**
+   底部菜单栏布局
+ */
+#foot{
+    width: 800px;
+    height: 70px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 15px;
+    margin: 0 auto;
+    display: none;
+}
+
+/**
+   左上角网址标题菜单布局
+ */
+#none_httptitle_nav{
+    position: fixed;
+    top: 10px;
+    left: 40px;
+}

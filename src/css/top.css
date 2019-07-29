@@ -1,0 +1,84 @@
+
+/***********雪花效果**************/
+.toolbar{height:31px;line-height:29px;color:#8e8e8e;background:#f5f6f8;display:block;text-align:center}
+.snowFall{position: absolute; top: 0; z-index: 3333;pointer-events: none;_display: none; color: #ffffff;}
+.snowFallTop{left: 0; width: 700px; height: 162px; }
+.snowFallLeft{left: 0; height: 500px; z-index: 3333;}
+.snowFallRight{right: 0; height: 500px; z-index: 3333;}
+
+/*******************************顶部导航栏中搜索框和按钮样式************************/
+#top_from_search{
+    position: absolute;
+    left: 400px;
+    top: 5px;
+    width: 400px;
+    border-radius: 8px 0px 0px 8px;
+    /*background:transparent;*/
+    /*border-width: 1.2px;*/
+    border: 1.2px solid #fff;
+    /*border-color: red;*/
+    color: #222;
+    height: 50px;
+    /*border: 0px;*/
+}
+#top_from_button{
+    position: absolute;
+    left: 802px;
+    top: 5px;
+    height: 50px;
+    width: 100px;
+    border-radius: 0px 8px 8px 0px;
+    /*color: #d4d5d5;*/
+    color: #222;
+    /*font-weight: bold;*/
+    font-size: 16px;
+    /*border: solid 1px #538312;*/
+    border: 0px;
+    background: #fff;
+
+}
+
+/*顶部导航栏中日期 星期 翻译 样式*/
+#top_date{
+    font-size: 15px;
+    position: absolute;
+    top:17px;
+    left: 170px;
+    cursor:pointer;
+}
+#top_week{
+    font-size: 15px;
+    position: absolute;
+    top:17px;
+    left: 260px;
+    cursor:pointer;
+}
+#top_translate{
+    font-size: 15px;
+    position: absolute;
+    top:17px;
+    left: 330px;
+    cursor:pointer;
+}
+
+/*顶部导航栏中 城市 天气 温度 详情样式*/
+
+#top_city{
+    font-size: 15px;
+    position: absolute;
+    top:17px;
+    left: 950px;
+}
+#top_weather{
+    font-size: 15px;
+    position: absolute;
+    top:17px;
+    left: 1020px;
+}
+#top_xiangqing{
+    font-size: 15px;
+    position: absolute;
+    top:17px;
+    left: 1210px;
+    cursor:pointer;
+}
