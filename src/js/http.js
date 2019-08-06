@@ -767,6 +767,22 @@ var module_http = function() {
         }else{
             document.getElementById('content').style.display = 'block';
         }
+        
+        //根据本地主题设置改变字体颜色
+        if(window.localStorage.getItem('mylink_deep_flag')=='1'){
+            document.getElementById('top').style.color = '#ffffff';
+            var arr = document.getElementsByClassName('httpname');
+            for(var i = 0;i<arr.length;i++){
+                arr[i].style.color = '#ffffff';
+            }
+        }
+        else if(window.localStorage.getItem('mylink_deep_flag')=='0'){
+            document.getElementById('top').style.color = '#333333';
+            var arr = document.getElementsByClassName('httpname');
+            for(var i = 0;i<arr.length;i++){
+                arr[i].style.color = '#333333';
+            }
+        }
 
     }
 

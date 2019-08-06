@@ -8,18 +8,17 @@
 /**
   最外层的body容器布局
  */
-body{
-    position: relative;
-    background: url("../images/bg.jpg") no-repeat;
-    background-size:100% 100%;
-    overflow: hidden;
-
+ body{
+  position: relative;
+  /* background: url("../images/bg/w1.jpg") no-repeat; */
+  background-size:100% 100%;
+  overflow: hidden;
+  color: #333333;
 }
 #box{
     position: relative;
     width: 1300px;
     margin: 0 auto;
-    /*border: #00c6ff 1px solid;*/
     overflow: hidden;
 }
 /**
@@ -30,6 +29,8 @@ body{
     margin-top: 5px;
     width: 1300px;
     height: 60px;
+    color: #ffffff;
+    /* font-weight: bold; */
 }
 
 /**
@@ -46,7 +47,7 @@ body{
     width: 900px;
     height: 480px;
     margin-bottom: 60px;
-    /*background: #a6e1ec;*/
+    color:#ffffff;
 }
 #content td{
     /*border: #00ec00 1px solid;*/
@@ -67,6 +68,7 @@ body{
     bottom: 15px;
     margin: 0 auto;
     display: none;
+    color: #333333;
 }
 
 /**

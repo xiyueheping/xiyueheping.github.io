@@ -7,7 +7,8 @@
  * 基本函数：无
  */
 
-
+//导入背景图片模块
+import { m_setbg } from "./setbg.js"
 //导入雪花效果模块
 import { m_snow } from "./snow.js"
 //导入日期天气模块
@@ -36,10 +37,13 @@ var module_event = function() {
     this.onloadevent = function () {
 
            document.getElementsByTagName('body')[0].style.height = window.innerHeight + 'px';
-           m_snow.snow();                      //执行雪花效果
-
+           
+           m_setbg.set();                      //切换背景图片
+           
+           
 
            m_cityweather.showcityweather();    //加载地点天气信息进行渲染
+
            //间歇调用，每隔一个小时重新刷新一次天气日期信息
            setInterval(function(){
                m_cityweather.showcityweather();
@@ -49,7 +53,8 @@ var module_event = function() {
            m_search.setsearch();               //加载页面执行设置搜索引擎函数
            m_search.search_qiehuan();          //注册与搜索引擎有关的事件
            m_http.http_chushihua();            //初始化本地网址数据 进行渲染
-
+           m_snow.snow();                      //执行雪花效果
+           
            //添加网址框的显示与隐藏控制
            $("#none_btn_showaddwindow").click(function(){
             $("#foot").slideToggle("slow");

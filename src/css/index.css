@@ -12,9 +12,19 @@ a:visited{
     text-decoration: none;
 }
 
-
 /***************************主体内容框中的表格样式***********************/
+.httpname{
+    color: #ffffff;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 
+}
 #content a{
     position: relative;
    display: block;
@@ -59,15 +69,5 @@ a:visited{
     top: 0px;
     right: 0px;
 }
-.httpname{
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 5px;
-    text-align: center;
-    font-size: 12px;
-    color: #fff;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-}
+
 
