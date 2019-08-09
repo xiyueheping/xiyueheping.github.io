@@ -3,7 +3,6 @@ import { m_setbg } from "./setbg.js"
 //提示帮助信息
 window.help = function(){
     console.log('daochu():    导出本地数据');
-    console.log('deep(0/1):   切换背景主题');
     console.log('setbg(name,0/1): 根据name切换背景图片');
 }
 
@@ -18,25 +17,8 @@ window.daochu = function(){
     console.log(str);
 }
 
-//切换背景主题
-window.deep = function(flag){
-   if(flag === 1){
-       console.log('切换到深色主题');
-       window.localStorage.setItem('mylink_deep_flag','1');
-       m_setbg.set();
-   }
-   else if(flag === 0){
-       console.log('切换到暖色主题');
-       window.localStorage.setItem('mylink_deep_flag','0');
-       m_setbg.set();
-   }
-   else{
-       console.log('参数错误：（0/1）');
-   }
-}
-
 //根据name切换背景图片
-window.setbg = function(name,flag){
-    m_setbg.setbyname(name,flag)
+window.setbg = function(name){
+    m_setbg.setbyname(name)
 }
 export {  }

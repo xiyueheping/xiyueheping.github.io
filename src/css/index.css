@@ -15,6 +15,7 @@ a:visited{
 /***************************主体内容框中的表格样式***********************/
 .httpname{
     color: #ffffff;
+    font-weight: bold;
     width: 80%;
     margin: 0 auto;
     margin-top: 5px;
