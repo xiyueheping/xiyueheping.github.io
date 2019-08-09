@@ -9,7 +9,7 @@ function module_serch(){
                if(window.localStorage.getItem('mylink_search')==null){
                    window.localStorage.setItem('mylink_search','百度搜索');
                    document.getElementById('top_from_button').value = '百度搜索';
-                   document.getElementById('top_form').action='http://www.baidu.com/s';
+                   document.getElementById('top_form').action='https://www.baidu.com/s';
                    document.getElementById('top_from_search').name='wd'
                                }
                //如果不为空 根据本地信息进行渲染
@@ -19,12 +19,12 @@ function module_serch(){
             
                if (window.localStorage.getItem('mylink_search')=='百度搜索') {
                    // console.log('---本地搜索信息为：百度搜索');
-                   document.getElementById('top_form').action='http://www.baidu.com/s';
+                   document.getElementById('top_form').action='https://www.baidu.com/s';
                    document.getElementById('top_from_search').name='wd'
                }
                else if(window.localStorage.getItem('mylink_search')=='搜狗搜索'){
                    // console.log('---本地搜索信息为：搜狗搜索');
-                   document.getElementById('top_form').action='http://sogou.com/web';
+                   document.getElementById('top_form').action='https://sogou.com/web';
                    document.getElementById('top_from_search').name='query'
                }
                else if(window.localStorage.getItem('mylink_search')=='谷歌搜索'){
@@ -34,7 +34,7 @@ function module_serch(){
                }
                else if(window.localStorage.getItem('mylink_search')=='必应搜索'){
                    // console.log('---本地搜索信息为：必应搜索');
-                   document.getElementById('top_form').action='http://cn.bing.com/search';
+                   document.getElementById('top_form').action='https://cn.bing.com/search';
                    document.getElementById('top_from_search').name='wd'
                }
             }
