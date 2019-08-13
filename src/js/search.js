@@ -72,7 +72,7 @@ function module_serch(){
                document.getElementById('abd').onclick = function(){
                     document.getElementById('top_from_button').value=this.innerHTML;
                     document.getElementById('none_search_nav').style.display="none";
-                    document.getElementById('top_form').action='http://www.baidu.com/s';
+                    document.getElementById('top_form').action='https://www.baidu.com/s';
                     document.getElementById('top_from_search').name='wd';
                     window.localStorage.setItem('mylink_search','百度搜索');
                }
@@ -80,7 +80,7 @@ function module_serch(){
                document.getElementById('asg').onclick = function(){
                     document.getElementById('top_from_button').value=this.innerHTML;
                     document.getElementById('none_search_nav').style.display="none";
-                    document.getElementById('top_form').action='http://sogou.com/web';
+                    document.getElementById('top_form').action='https://sogou.com/web';
                     document.getElementById('top_from_search').name='query';
                     window.localStorage.setItem('mylink_search','搜狗搜索');
                }
@@ -96,7 +96,7 @@ function module_serch(){
                document.getElementById('aby').onclick = function(){
                    document.getElementById('top_from_button').value=this.innerHTML;
                    document.getElementById('none_search_nav').style.display="none";
-                   document.getElementById('top_form').action='http://cn.bing.com/search';
+                   document.getElementById('top_form').action='https://cn.bing.com/search';
                    document.getElementById('top_from_search').name='q';
                    window.localStorage.setItem('mylink_search','必应搜索');
                }
