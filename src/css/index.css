@@ -52,10 +52,11 @@ a:visited{
     width: 90px;
     height: 90px;
     font-size: 45px;
+    font-weight: 500;
     line-height: 90px;
     font-family: 华文楷体;
-    color:#45b465;
-    background-color: #ffffff;
+    color: #ffffff;
+    background-color: #3981ff;
 }
 
 .http_del{
