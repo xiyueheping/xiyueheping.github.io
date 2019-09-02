@@ -14,13 +14,12 @@ var module_city_weather = function() {
     /**
      * 模块的成员函数，供外层事件处理模块调用
      */
-    // 获取当前地点天气信息并渲染
+    // 获取当前地点天气信息并渲染https://www.tianqiapi.com/api/?appid=89336239&appsecret=hU8TwE52&city=
       this.showcityweather = function(){
            $.ajax({
             type: 'GET',
-            url: 'https://www.tianqiapi.com/api/',
+            url: 'https://www.tianqiapi.com/api/?appid=89336239&appsecret=hU8TwE52&city=',
             dataType: 'json',
-            data: 'city=',
             error: function () {
                 // alert('请求失败');
                 document.getElementById("top_weather").innerHTML = "Failed to load...";
