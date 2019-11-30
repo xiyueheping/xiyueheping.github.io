@@ -15,6 +15,67 @@
 
 
 
+/*窗口宽度小于1500px时*/
+@media only screen and (max-width: 1500px) {
+    /*顶部搜索框下方隐藏菜单样式*/
+    #none_search_nav{
+        width:95px;
+        box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
+        z-index:100;
+        position: absolute;
+        left: 802px;
+        top:60px;
+        display: none;
+    }
+  
+}
+/*窗口宽度小于1700px大于1500px时*/
+@media only screen and (max-width: 1700px) and  (min-width: 1500px){
+     /*顶部搜索框下方隐藏菜单样式*/
+     #none_search_nav{
+        width:95px;
+        box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
+        z-index:100;
+        position: absolute;
+        left: 877px;
+        top:60px;
+        display: none;
+    }
+  
+}
+/*窗口宽度大于1700px时*/
+@media only screen and (min-width: 1700px) {
+     /*顶部搜索框下方隐藏菜单样式*/
+     #none_search_nav{
+        width:95px;
+        box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
+        z-index:100;
+        position: absolute;
+        left: 977px;
+        top:60px;
+        display: none;
+    }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*设置左上角网址标题菜单样式*/
 #none_httptitle_nav{
     list-style-type: none;
@@ -61,16 +122,7 @@
 
 
 /*顶部搜索框下方隐藏菜单样式*/
-#none_search_nav{
-    width:95px;
-    box-shadow: 0 0 10px 0 rgba(113,113,113,.5);
-    z-index:100;
-    position: absolute;
-    left: 802px;
-    top:60px;
-    display: none;
 
-}
 #none_search_nav a{
     /*color: #000;*/
     color: #8a8a8a;
