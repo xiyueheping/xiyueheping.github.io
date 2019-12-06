@@ -84,10 +84,16 @@
                font-size: 15px;
                position: absolute;
                top:17px;
-               left: 1210px;
+               left: 1160px;
                cursor:pointer;
            }
-
+           #top_shezhi{
+            position: absolute;
+            top:17px;
+            left: 1240px;
+            font-size: 15px;
+            cursor:pointer;
+        }
     
 }
 /*窗口宽度小于1700px大于1500px时*/

@@ -4,64 +4,29 @@
  *
  * 模块变量：http_data
  */
+
+//导入数据层管理模块
+import { m_data } from "./data.js"
+
 var module_http = function() {
-    //当前模块的全局变量
-    var http_data = [
-        {
-            type:'编程学习',
-            data:[
-                {   name:"慕课网",
-                    href:"https://www.imooc.com/"
-                },
-                {   name:"网易云课堂",
-                    href:"http://study.163.com/my"
-                }
-            ]
-        },
-        {
-            type:'休闲娱乐',
-            data:[
-                {   name:"知乎",
-                    href:"https://www.zhihu.com/"
-                },
-                {   name:"虎牙直播",
-                    href:"https://www.huya.com"
-                }
-            ]
-        }
-    ]
-    //当前网址分页
+
+    //当前模块的全局变量（后期从数据层对象中加载）
+    var http_data = null;
+    
+    //当前网址分页信息（后期从数据层对象中加载）
     var thistype = null;
-    //加载页面默认执行 把本地信息更新到全局对象http_data 并进行渲染
+    //加载页面默认执行 把数据层对象信息更新到全局对象http_data 并进行渲染
 	this.http_chushihua = function(){
-
-                   
-                    /***如果刚开始本地数据为空，向本地写入初始网址信息****/
-                      if(window.localStorage.getItem("mylink_http_data")===null ||window.localStorage.getItem("thistype")===null){
-                         // console.log('---初始化本地网址数据');
-                         var str_type = JSON.stringify(http_data);
-                         window.localStorage.setItem('mylink_http_data',str_type);
-                         window.localStorage.setItem('thistype',http_data[0].type);
-                     }
-
-
-                    //然后把本地信息更新到全局对象中以便使用
-                     var json_str = window.localStorage.getItem("mylink_http_data");
-                     http_data = JSON.parse(json_str);
-
-                     //记录当前页面需要渲染的分类
-                     thistype = window.localStorage.getItem("thistype");
-                     // console.log(thistype);
-
-
-                    //根据更新的全局对象渲染页面
+                    http_data = m_data.mylink_globaldata.httpdata;
+                    thistype = m_data.mylink_globaldata.thistype;
+                    
+                    //根据更新的 http_data 网址数据渲染页面
                     this.xuanran_httptype(thistype);
-                    this.xuanran_httpdata(thistype,false); //初始加载默认渲染第一个分类
+                    this.xuanran_httpdata(thistype,false); //初始加载默认渲染第一个分类，不显示jQuery动画
 	}
 
-    //添加网址
+    //添加网址   先更新http_data与数据层对象 再将数据保存到本地  再根据内存http_data渲染页面
     this.http_add = function() {
-
 
                     //获取新的网址对象
                     var name= document.getElementById('foot_input_name').value.trim();
@@ -81,12 +46,6 @@ var module_http = function() {
                         return;
                     }
 
-
-                    
-                    // 把localstorage中数据提取到全局对象中
-                    var json_str = window.localStorage.getItem("mylink_http_data");
-                    http_data = JSON.parse(json_str);
-
                     //读取出新网址所在分类
                     var http_arr = [];
                     for(var i =0;i<http_data.length;i++){
@@ -95,7 +54,6 @@ var module_http = function() {
                         }
                     }
 
-
                     /*****对网址信息比对查看是否有分类空间不足情况***/
                    var len = document.querySelectorAll('#content td').length;//获取table中所有td标签数量
                     if(http_arr.data.length>=len){
@@ -103,7 +61,6 @@ var module_http = function() {
                         return;
                     }
                     /*查看是否有网址同名现象*/
-
                      for(var i = 0;i<http_data.length;i++){
                          for(var j = 0;j<http_data[i].data.length;j++){
 
@@ -115,7 +72,7 @@ var module_http = function() {
                      }
 
 
-                     //正式把数据添加到全局对象中
+                     //正式把数据添加到http_data对象中
                      for(var i =0;i<http_data.length;i++){
                          if(http_data[i].type==new_httpobj.type){
                              var obj = {
@@ -126,24 +83,21 @@ var module_http = function() {
                              break;
                          }
                      }
-                     // console.log('---网址数据添加成功:');
-                     // console.log(new_httpobj);
-                         
-                     // 把全局对象保存到本地.对页面重新渲染
-                     this.http_save();
+                     
+                     //根据http_data数据更新数据层全局对象
+                     m_data.mylink_globaldata.httpdata = http_data;
+                     //将新的数据层全局对象保存到本地
+                     m_data.savedata();
+                     //重新渲染页面
                      this.xuanran_httptype(new_httpobj.type);
                      this.xuanran_httpdata(new_httpobj.type,false);
-   
 
    }
 
-    //删除网址 根据name删除
+    //删除网址 根据name删除 先更新http_data 再将数据保存到本地  再根据内存http_data渲染页面
     this.http_del = function(name){
-                 // 把localstorage中数据提取到全局对象中
-                 var json_str = window.localStorage.getItem("mylink_http_data");
-                 http_data = JSON.parse(json_str);
-
-                //根据name寻找出匹配的网址数据进行删除
+                
+                //根据name寻找出匹配的网址数据在http_data进行删除
                  for(var i = 0;i<http_data.length;i++){
                      for(var j = 0;j<http_data[i].data.length;j++){
                          if(name == http_data[i].data[j].name){
@@ -164,27 +118,26 @@ var module_http = function() {
                          type = title_arr[i].innerHTML;
                      }
                  }
-                 // 把全局对象保存到本地.对页面重新渲染
-                 this.http_save();
+
+
+                 //根据http_data数据更新数据层全局对象
+                 m_data.mylink_globaldata.httpdata = http_data;
+                 //将新的数据层全局对象保存到本地
+                 m_data.savedata();
+                 //重新渲染页面
                  this.xuanran_httptype(type);
                  this.xuanran_httpdata(type,false);
 
-
                  return false;
 
-
-
-
   }
-    //根据name上移网址
+    //根据name上移网址 先更新http_data 再将数据保存到本地  再根据内存http_data渲染页面
     this.http_moveup = function (name) {
         var name = name;           //记录下网址名称
         var type = this.gettype(); //获取当前网址所在分类
         var type_index;            //保存当前分类在全局对象中的下标位置
         var name_index;            //保存当前网址在当前分类下的下标位置
-        // 把localstorage中数据提取到全局对象中
-        var json_str = window.localStorage.getItem("mylink_http_data");
-        http_data = JSON.parse(json_str);
+       
 
         //寻找当前分类的下标位置
         for(var i =0;i<http_data.length;i++){
@@ -211,25 +164,24 @@ var module_http = function() {
         var httpobj = http_data[type_index].data[name_index-1];
         http_data[type_index].data[name_index-1] = http_data[type_index].data[name_index];
         http_data[type_index].data[name_index] = httpobj;
-        // 把全局对象保存到本地.对页面重新渲染
-        this.http_save();
-        this.xuanran_httptype(type);
-        this.xuanran_httpdata(type,false);
-        // console.log('上移网址成功');
-        // console.log(http_data);
 
+
+         //根据http_data数据更新数据层全局对象
+         m_data.mylink_globaldata.httpdata = http_data;
+         //将新的数据层全局对象保存到本地
+         m_data.savedata();
+         //重新渲染页面
+         this.xuanran_httptype(type);
+         this.xuanran_httpdata(type,false);
 
     }
-    //根据name下移网址
+    //根据name下移网址 先更新http_data 再将数据保存到本地  再根据内存http_data渲染页面
     this.http_movedown = function (name) {
         var name = name;           //记录下网址名称
         var type = this.gettype(); //获取当前网址所在分类
         var type_index;            //保存当前分类在全局对象中的下标位置
         var name_index;            //保存当前网址在当前分类下的下标位置
-        // 把localstorage中数据提取到全局对象中
-        var json_str = window.localStorage.getItem("mylink_http_data");
-        http_data = JSON.parse(json_str);
-
+        
         //寻找当前分类的下标位置
         for(var i =0;i<http_data.length;i++){
             if(http_data[i].type===type){
@@ -256,12 +208,14 @@ var module_http = function() {
         var httpobj = http_data[type_index].data[name_index+1];
         http_data[type_index].data[name_index+1] = http_data[type_index].data[name_index];
         http_data[type_index].data[name_index] = httpobj;
-        // 把全局对象保存到本地.对页面重新渲染
-        this.http_save();
-        this.xuanran_httptype(type);
-        this.xuanran_httpdata(type,false);
-        // console.log('下移网址成功');
-        // console.log(http_data);
+
+         //根据http_data数据更新数据层全局对象
+         m_data.mylink_globaldata.httpdata = http_data;
+         //将新的数据层全局对象保存到本地
+         m_data.savedata();
+         //重新渲染页面
+         this.xuanran_httptype(type);
+         this.xuanran_httpdata(type,false);
 
     }
     //根据name编辑网址
@@ -273,6 +227,7 @@ var module_http = function() {
         var href = '';    //保存当前网址地址
         var type = this.gettype(); //获取当前分类
         var type_arr = [];  //获取所有分类
+
         for(var i=0;i<http_data.length;i++){
             type_arr.push(http_data[i].type);
         }
@@ -295,11 +250,10 @@ var module_http = function() {
         }
         //设置下拉框默认内容为当前选择分类
         document.getElementById('input_type_fsl').value = type;
-        // alert(3);
     }
     //点击网址编辑框确认修改按钮执行函数
     this.http_querenxiugai = function () {
-        //保存修改之前的所有网址信息
+        //保存修改之前的网址信息
         var beforename = document.getElementById('none_menu_a').title;
         var beforehref = '';
         var beforetype = this.gettype(); //获取当前分类
@@ -311,7 +265,7 @@ var module_http = function() {
             }
         }
 
-        //保存修改之后的所有网址信息
+        //保存修改之后的网址信息
         var aftername = document.getElementById('input_name_fsl').value.trim();
         var afterhref = document.getElementById('input_href_fsl').value.trim();
         var aftertype = document.getElementById('input_type_fsl').value;
@@ -323,7 +277,7 @@ var module_http = function() {
         }
         if(teststr(aftername)===false){
             alert('修改失败:网址名称只能由字母数字下划线组成');
-            return;
+            return false;
         }
         //对网址对象格式进行验证 验证不通过直接返回
         var afterobj = {
@@ -384,21 +338,25 @@ var module_http = function() {
                     break;
                 }
             }
-            // console.log('---修改网址成功');
-            // console.log(http_data);
 
         }
         
         //改变当前网址分页内容
         thistype = afterobj.type
-        // 把全局对象保存到本地.对页面重新渲染
-        this.http_save();
-        this.xuanran_httptype(afterobj.type);
-        this.xuanran_httpdata(afterobj.type,false);
+
+        //根据http_data数据更新数据层全局对象
+        m_data.mylink_globaldata.httpdata = http_data;
+        //将新的数据层全局对象保存到本地
+        m_data.savedata();
 
         //修改成功后关闭网址编辑框
-        // alert('修改成功');
         document.getElementById('none_httpedit').style.display = 'none';
+
+        //重新渲染页面
+        this.xuanran_httptype(thistype);
+        this.xuanran_httpdata(thistype,false);
+
+        
         return true;
     }
     
@@ -437,11 +395,15 @@ var module_http = function() {
 
     }
     
-    //点击网址标题后执行函数
+    //点击网址标题后执行函数  将新的分页保存到内存 再保存到本地 再根据内存渲染页面
     this.httptitleclick = function (type) {
+        //将所点击的分页信息更新到内存
+        thistype = type; //更新当前模块分页
+        m_data.mylink_globaldata.thistype = type; //更新数据层模块分页
+
 	    //将所点击的分页更新到本地
-        window.localStorage.setItem('thistype',type);
-        thistype = type;
+        m_data.savedata();
+        
         //重新对分类和网址进行渲染
         this.xuanran_httptype(type);
         this.xuanran_httpdata(type,true);
@@ -469,9 +431,7 @@ var module_http = function() {
         }
 
       var type = str.trim();
-      // 把localstorage中数据提取到全局对象中
-      var json_str = window.localStorage.getItem("mylink_http_data");
-      http_data = JSON.parse(json_str);
+      
       if(http_data.length>=13){
           alert('分类空间不足');
           return;
@@ -487,11 +447,19 @@ var module_http = function() {
           type:type,
           data:[]
       });
-      //更新当前分类页信息
-      thistype = type;
-      window.localStorage.setItem('thistype',thistype);
-      // 把全局对象保存到本地.对页面重新渲染
-      this.http_save();
+
+
+
+
+      //更新当前分类页信息 到内存
+      thistype = type; //更新当前模块分页
+      m_data.mylink_globaldata.thistype = type; //更新数据层模块分页
+
+      //更新网址数据到内存
+      m_data.mylink_globaldata.httpdata = http_data;
+
+      // 把新的数据层全局对象保存到本地并根据内存渲染页面
+      m_data.savedata();
       this.xuanran_httptype(type);
       this.xuanran_httpdata(type,true);
 
@@ -525,9 +493,7 @@ var module_http = function() {
             return;
         }
 
-        // 把localstorage中数据提取到全局对象中
-        var json_str = window.localStorage.getItem("mylink_http_data");
-        http_data = JSON.parse(json_str);
+        
         //如果新的分类重名 直接return
         for(var i = 0;i<http_data.length;i++){
             if(aftertype == http_data[i].type){
@@ -541,16 +507,18 @@ var module_http = function() {
                 http_data[i].type = aftertype;
             }
         }
+        
+       //更新当前分类页信息 到内存
+       thistype = redtype; //更新当前模块分页
+       m_data.mylink_globaldata.thistype = redtype; //更新数据层模块分页
 
-        //更新当前分类页信息
-        thistype = redtype;
-        window.localStorage.setItem('thistype',thistype);
+       //更新网址数据到内存
+       m_data.mylink_globaldata.httpdata = http_data;
 
-        // 把全局对象保存到本地.对页面重新渲染
-        this.http_save();
-        this.xuanran_httptype(redtype); //只需要对标题数据重新渲染即可
-        // console.log('---分类标题修改成功');
-        // console.log(http_data);
+       // 把新的数据层全局对象保存到本地并根据内存渲染页面
+       m_data.savedata();
+       this.xuanran_httptype(redtype); //只渲染标题即可 因为页面网址数据不变
+
     }
 
     //点击删除网址分类按钮响应函数
@@ -560,10 +528,8 @@ var module_http = function() {
         if(!window.confirm('删除分类会删除该分页下所有网址，是否确认删除?')){
             return;
         }
-        // 把localstorage中数据提取到全局对象中
-        var json_str = window.localStorage.getItem("mylink_http_data");
-        http_data = JSON.parse(json_str);
-        //删除对应分类下所有数据
+
+        //修改http_data 删除对应分类下所有数据
         for (var i = 0;i<http_data.length;i++){
             if(type === http_data[i].type){
                 http_data.splice(i,1);
@@ -571,51 +537,53 @@ var module_http = function() {
 
             }
         }
+
         //如果删除的分类就是当前页面分类  那就把第一个分类做为当前页面分类进行渲染
         if(type == thistype){
-            //如果数据为空就给当前分类赋值null 并重新渲染
+            //如果数据为空就给当前分类赋值null 并更新到内存 保存到本地
             if(http_data.length==0){
                 thistype = null;
-                window.localStorage.setItem('thistype',thistype);
+                m_data.mylink_globaldata.thistype = null;
+                m_data.mylink_globaldata.httpdata = http_data;
 
-                // 把全局对象保存到本地.对页面重新渲染
-                this.http_save();
+                // 把数据层全局对象保存到本地 根据内存数据对页面重新渲染
+                console.log(http_data);
+                m_data.savedata();
                 this.xuanran_httptype(thistype);
                 this.xuanran_httpdata(thistype,false);
-                // console.log('删除分类成功');
-                // console.log(http_data);
+
             }
             //如果本地数据不为空 那就把第一个分类做为当前页面分类进行渲染
             else{
                 thistype = http_data[0].type;
-                window.localStorage.setItem('thistype',thistype);
-                // 把全局对象保存到本地.对页面重新渲染
-                this.http_save();
+                m_data.mylink_globaldata.thistype = http_data[0].type;
+                m_data.mylink_globaldata.httpdata = http_data;
+
+                // 把数据层全局对象保存到本地 根据内存数据对页面重新渲染
+                m_data.savedata();
                 this.xuanran_httptype(thistype);
-                this.xuanran_httpdata(thistype,true);
-                // console.log('删除分类成功');
-                // console.log(http_data);
+                this.xuanran_httpdata(thistype,false);
+ 
             }
         }
-        //如果要删除的分类不是当前页面分类 只需要重新渲染标题数据 网址数据不用变
+        //如果要删除的分类不是当前页面分类 只需要重新渲染标题数据 只需要修改本地网址数据 thistype不变
         else{
-            // 把全局对象保存到本地.对页面重新渲染
-            this.http_save();
-            this.xuanran_httptype(thistype);
-            // console.log('删除分类成功');
-            // console.log(http_data);
+            m_data.mylink_globaldata.httpdata = http_data;
+
+            // 把数据层全局对象保存到本地 根据内存数据对页面重新渲染
+            m_data.savedata();
+            this.xuanran_httptype(thistype); //只渲染标题
         }
 
     }
+
+    // 工作到此-----------------------
     //点击上移网址分类按钮响应函数 传入需要移动的标题
     this.moveuptitle = function (type) {
         var redtype = this.gettype(); //获取当前页面的分类标题
         var type = type;              //保存需要移动的标题
         var type_index;               //保存当前分类的下标位置
-        // 把localstorage中数据提取到全局对象中
-        var json_str = window.localStorage.getItem("mylink_http_data");
-        http_data = JSON.parse(json_str);
-
+ 
         //寻找当前分类下标位置
         for (var i = 0;i<http_data.length;i++){
             if(type == http_data[i].type){
@@ -632,23 +600,20 @@ var module_http = function() {
         var obj = http_data[type_index-1];
         http_data[type_index-1] = http_data[type_index];
         http_data[type_index] = obj;
+        
+        //更新网址数据到内存
+        m_data.mylink_globaldata.httpdata = http_data;
 
-        // 把全局对象保存到本地.对页面重新渲染
-        this.http_save();
-        this.xuanran_httptype(redtype); //只需要重新渲染标题数据即可
-
-        // console.log('---上移分类成功');
-        // console.log(http_data);
+        // 把新的数据层全局对象保存到本地并根据内存渲染页面
+        m_data.savedata();
+        this.xuanran_httptype(redtype); //只渲染标题即可 因为页面网址数据不变
     }
     //点击下移网址分类按钮响应函数 传入需要移动的标题
     this.movedowntitle = function (type) {
         var redtype = this.gettype(); //获取当前页面的分类标题
         var type = type;              //保存需要移动的标题
         var type_index;               //保存当前分类的下标位置
-        // 把localstorage中数据提取到全局对象中
-        var json_str = window.localStorage.getItem("mylink_http_data");
-        http_data = JSON.parse(json_str);
-
+        
         //寻找当前分类下标位置
         for (var i = 0;i<http_data.length;i++){
             if(type == http_data[i].type){
@@ -666,17 +631,18 @@ var module_http = function() {
         http_data[type_index+1] = http_data[type_index];
         http_data[type_index] = obj;
 
-        // 把全局对象保存到本地.对页面重新渲染
-        this.http_save();
-        this.xuanran_httptype(redtype); //只需要重新渲染标题数据即可
+        //更新网址数据到内存
+        m_data.mylink_globaldata.httpdata = http_data;
 
-        // console.log('---下移分类成功');
-        // console.log(http_data);
+        // 把新的数据层全局对象保存到本地并根据内存渲染页面
+        m_data.savedata();
+        this.xuanran_httptype(redtype); //只渲染标题即可 因为页面网址数据不变
     }
 
      /*****基本函数，供上层函数调用******/
      //根据更新的全局对象渲染网址分类标题信息
      this.xuanran_httptype = function(type) {
+        // console.log('---开始渲染网址分类标题信息');
          if(type == null){
              var none_httptitle_nav = document.getElementById('none_httptitle_nav');
              none_httptitle_nav.innerHTML = `<li><a id="alltitle">所有分类</a></li>
@@ -685,7 +651,7 @@ var module_http = function() {
              xialakuang.innerHTML = '';
              return;
          }
-         // console.log('---开始渲染网址分类标题信息');
+         
          //从全局对象中提取出所有分类标题放到一个type数组中
          var type_arr = [];
          for(var i = 0;i<http_data.length;i++){
@@ -725,8 +691,14 @@ var module_http = function() {
 
     //根据更新的全局对象渲染网址内容信息 flag_fade为true说明渲染时显示动画效果，否则不显示
     this.xuanran_httpdata = function(type,flag_fade) {
+        // console.log('---开始渲染网址内容信息');
          //如果type值为null说明网址数据为空 不渲染数据 直接return
          if(type==null){
+            var table = document.getElementById('content');//渲染前将表格进行初始化
+            table.style.display = 'none';
+            table.innerHTML = `<tr><td></td><td></td><td></td><td></td><td></td></tr>
+                               <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                               <tr><td></td><td></td><td></td><td></td><td></td></tr>`;
              return;
          }
 
@@ -739,7 +711,7 @@ var module_http = function() {
                 break;
             }
         }
-        // console.log('---开始渲染网址内容信息');
+        
         // console.log(data);
         var table = document.getElementById('content');//渲染前将表格进行初始化
         table.style.display = 'none';
@@ -758,7 +730,7 @@ var module_http = function() {
                 <img class="httpimg" style="display: none"  onload="m_event.imgonload(event)" src=${this.getico(data[i].href)}>
                 <div class="httpimg2" style="display: inline-block;">${data[i].name[0]}</div>
                 <div class="httpname">${data[i].name}</div>
-                <img style="display: none" onclick="return m_event.http_del(event)" class="http_del" src="src/images/http_del.png">
+                <img style="display: none" onclick="return m_event.http_del(event)" title="删除" class="http_del" src="src/images/http_del.png">
             </a>`
         }
         if(flag_fade == true){
@@ -780,12 +752,6 @@ var module_http = function() {
 
     }
 
-    //把当前全局对象http_data保存到本地
-    this.http_save = function(){
-           var str = JSON.stringify(http_data);//把json对象转换成字符串
-           window.localStorage.setItem('mylink_http_data',str);
-           window.localStorage.setItem('thistype',thistype);
-     }
     //网址信息验证 传入网址信息，返回验证结果
     this.check_http = function(new_httpobj){
             /****表单验证部分*****/

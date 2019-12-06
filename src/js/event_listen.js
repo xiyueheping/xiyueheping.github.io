@@ -22,23 +22,22 @@ import { m_http } from "./http.js"
 //导入翻译模块
 import { m_trans } from "./trans.js"
 
+//导入数据层管理模块
+import { m_data } from "./data.js"
 
+//导入设置模块
+import { m_shezhi } from "./shezhi.js"
 var module_event = function() {
-
-    
-    
-    
-    
-
-    
-
 
     //主onload事件注册
     this.onloadevent = function () {
-
+           //调整页面高度
            document.getElementsByTagName('body')[0].style.height = window.innerHeight + 'px';
            
-           m_setbg.set();                      //切换背景图片
+           
+           m_data.loaddata();    //加载本地数据到数据层对象
+
+           m_setbg.loadbg();     //加载背景图片
            
            
 
@@ -63,54 +62,11 @@ var module_event = function() {
 
 
     }
-    //整屏滚动切换
-    this.scroll = function () {
-
-        var moveinout = this.moveinout;
-
-        //监听鼠标滚动事件
-        var timer = null;
-        $(document).on("mousewheel DOMMouseScroll", function(e) {
-           
-            //如果有窗口打开，存在阴影 禁止滚动
-            if(document.getElementById('window_bg').style.display!='none'){
-                return;
-            }
-
-            var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie
-                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1)); // firefox
-
-            if (delta > 0) {
-
-                // 只执行100毫秒之内触发的最后一个事件
-                if(timer != null){
-                    clearTimeout(timer);
-                }
-                timer = setTimeout(function () {
-
-                   m_http.scollup();
-                   moveinout(); // 重新注册移入移出事件
-
-
-                },100);
-            }
-            else if (delta < 0) {
-
-                if(timer != null){
-                    clearTimeout(timer);
-                }
-
-                timer = setTimeout(function () {
-                 m_http.scolldown();
-                 moveinout(); // 重新注册移入移出事件
-
-                },100);
-
-            }
-        });
-
+    //由切换背景弹窗中图片元素注册的点击事件
+    this.clkimg = function(imgindex){
+        m_setbg.clkimg(imgindex);
     }
-
+    
     //由网址标题html元素注册的点击事件
     this.httptitle_click = function (event) {
         // console.log(event.target.style.color);
@@ -159,21 +115,60 @@ var module_event = function() {
     
         //点击翻译按钮响应事件
         document.getElementById('top_translate').onclick = m_trans.showtrans;
+   
+        //点击右上方设置按钮响应事件
+        document.getElementById('top_shezhi').onclick = m_shezhi.openrightmenu;
+        
+        //点击右侧滑动菜单内部关闭按钮响应事件
+        document.getElementById('close_rightmenu').onclick = m_shezhi.closerightmenu;
+        
+        //点击主题背景按钮响应事件
+        document.getElementById('btn_bgimage').onclick = m_setbg.showsetbgwindow;
 
+        //点击关闭切换背景窗口按钮响应事件
+        document.getElementById('setbg_close').onclick = m_setbg.closesetbgwindow; 
+        
+        //点击切换背景窗口中save按钮响应事件
+        document.getElementById('querensetbg').onclick = m_setbg.querensetbg; 
+
+        //点击导出数据按钮响应事件
+        document.getElementById('btn_outputdata').onclick = m_data.outputdata;
+
+        //点击关闭导出数据窗口按钮响应事件
+        document.getElementById('output_close').onclick = m_data.closeoutputwindow;
+        
+        //点击导入数据按钮响应事件
+        document.getElementById('btn_inputdata').onclick = m_data.openinputwindow;
+        
+        //点击确认导入按钮响应事件
+        document.getElementById('quereninput').onclick = m_data.doinputdata;
+
+        //点击关闭导入数据窗口按钮响应事件
+        document.getElementById('input_close').onclick = m_data.closeinputwindow;
+       
         //点击阴影部分关闭已打开弹窗
         document.getElementById('window_bg').onclick = function(event){
             //如果天气详情弹窗已打开 就关闭它
             if(document.getElementById('none_tianqixiangqing').style.display!=='none'){
                 m_cityweather.closexiangqing();
-                console.log('---关闭天气详情窗口');
             }
             
             //如果翻译弹窗已打开 就关闭它
             if(document.getElementById('none_trans').style.display!=='none'){
                 m_trans.close();
-
             }
-
+            //如果右侧菜单已打开 就关闭它
+            if(document.getElementById("rightmenu").style.display!='none'){
+                m_shezhi.closerightmenu();
+            }
+            //如果导出数据窗口已打开 就关闭它
+            if(document.getElementById('none_output').style.display!='none'){
+                m_data.closeoutputwindow();
+            }
+            //如果导入数据窗口已打开 就关闭它
+            if(document.getElementById('none_input').style.display!='none'){
+                m_data.closeinputwindow();
+            }
 
             event.stopPropagation();
         }
@@ -254,7 +249,53 @@ var module_event = function() {
         }
 
     }
+     //整屏滚动切换
+    this.scroll = function () {
 
+        var moveinout = this.moveinout;
+
+        //监听鼠标滚动事件
+        var timer = null;
+        $(document).on("mousewheel DOMMouseScroll", function(e) {
+           
+            //如果有窗口打开，存在阴影 禁止滚动
+            if(document.getElementById('window_bg').style.display!='none'){
+                return;
+            }
+
+            var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie
+                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1)); // firefox
+
+            if (delta > 0) {
+
+                // 只执行100毫秒之内触发的最后一个事件
+                if(timer != null){
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(function () {
+
+                   m_http.scollup();
+                   moveinout(); // 重新注册移入移出事件
+
+
+                },100);
+            }
+            else if (delta < 0) {
+
+                if(timer != null){
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(function () {
+                 m_http.scolldown();
+                 moveinout(); // 重新注册移入移出事件
+
+                },100);
+
+            }
+        });
+
+    }
     //响应主体内容框中所有图标的鼠标移入移出事件
      this.moveinout = function () {
         var arr = document.querySelectorAll('#content a');
@@ -390,9 +431,6 @@ var module_event = function() {
 
 
         }
-
-
-
 }
 
 var m_event = new module_event();

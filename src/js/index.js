@@ -4,8 +4,7 @@ import { $ } from "./jquery.js"
 //导入事件处理模块
 import { m_event } from "./event_listen.js"
 
-//导入help模块
-import "./help.js"
+
 //将事件处理模块导入到全局作用域，便于HTML中的代码去使用
 window.m_event = m_event;
 

@@ -35,7 +35,7 @@ margin:0 auto;"  ></canvas>
         <div class="top_title" id="top_city"></div>
         <div class="top_title" id="top_weather"></div>
         <div class="top_title" id="top_xiangqing"></div>
-
+        <div id="top_shezhi" >扩展功能</div>
     </div>
 
     <!-- ***********************主体内容框**************************-->
@@ -66,9 +66,16 @@ margin:0 auto;"  ></canvas>
 
 
 <!--********************************** 隐藏的页面元素 ****************************************-->
+<!-- 右侧滑动菜单 -->
+<div id="rightmenu">
+        <span></span>
+        <img id="close_rightmenu" width="28" height="28" src="./src/images/menu_close.png" style="margin-left: 143px;" />
+        <a id="btn_bgimage" style="width: 150px;">背景主题</a>
+        <a id="btn_inputdata" style="width: 150px;">导入数据</a>
+        <a id="btn_outputdata" style="width: 150px;">导出数据</a>
+   </div>
 
-
-<!--右上角网址分类标题菜单-->
+<!--左上角网址分类标题菜单-->
 <ul id="none_httptitle_nav">
 </ul>
 
@@ -109,13 +116,46 @@ margin:0 auto;"  ></canvas>
 
 <!--点击翻译按钮后响应此弹框-->
 <form id="none_trans" style="display: none;">
-    <div id="trans_title" style="">翻译</div>
+    <div id="trans_title" >翻译</div>
     <textarea id="trans_from" name="word"  placeholder="输入待翻译文本"></textarea>
     <textarea id="trans_to" name="word"  style=""></textarea>
     <img id="trans_close"   src="src/images/edit_close.png" >
 </form>
 
+<!--点击导出数据按钮后响应此弹框-->
+<form id="none_output" style="display: none;">
+        <div id="output_title" >导出数据</div>
+        <textarea id="output_data" name="word" onFocus="this.select()" style="margin: 0px;width: 440px;height: 406px;" ></textarea>
+        <img id="output_close"   src="src/images/edit_close.png" >
+</form>
 
+<!--点击导入数据按钮后响应此弹框-->
+<form id="none_input" style="display: none;">
+        <div id="input_title" >导入数据</div>
+        <textarea id="input_data" name="word"  style="margin: 0px;width: 440px;height: 370px;"  placeholder="导入新数据后原有数据将被覆盖"></textarea>
+        <img id="input_close"   src="src/images/edit_close.png" >
+        <button class="btn btn-primary"  id="quereninput">确认导入</button>
+</form>
+<!--点击主题背景按钮后响应此弹框-->
+<form id="none_setbg" style="display: none;">
+    <div id="setbg_title" >主题背景</div>
+    <img id="setbg_close"   src="src/images/edit_close.png" >
+    <button class="btn btn-primary"  id="querensetbg">save</button>
+    <div id="bgimg_box">
+        <img class="min_imgbg" onclick="m_event.clkimg(0)" width="160" height="100" src="./src/images/minbg/1.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(1)" width="160" height="100" src="./src/images/minbg/2.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(2)" width="160" height="100" src="./src/images/minbg/3.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(3)" width="160" height="100" src="./src/images/minbg/4.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(4)" width="160" height="100" src="./src/images/minbg/5.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(5)" width="160" height="100" src="./src/images/minbg/6.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(6)" width="160" height="100" src="./src/images/minbg/7.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(7)" width="160" height="100" src="./src/images/minbg/8.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(8)" width="160" height="100" src="./src/images/minbg/9.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(9)" width="160" height="100" src="./src/images/minbg/10.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(10)" width="160" height="100" src="./src/images/minbg/11.jpg" />
+        <img class="min_imgbg" onclick="m_event.clkimg(11)" width="160" height="100" src="./src/images/minbg/12.jpg" />
+    </div>
+</form>
 <!--点击天气详情按钮后响应此弹框-->
 <form id="none_tianqixiangqing" style="display: none;">
     <div id="tianqixiangqing_title" >天气详情</div>
